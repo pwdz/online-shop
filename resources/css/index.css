@@ -1,0 +1,113 @@
+body {
+  /* background: url("../img/github-logo.png") no-repeat center / cover; */
+  /* background-color: rgba(45, 46, 131, 0.637); */
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  font-family: "IRAN Sans";
+  /* to always keep everything centered */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  max-width: 1280px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-gap: 100px;
+}
+
+.menu {
+  /* overflow: hidden; */
+  background-color: #333;
+  padding-left: 25px;
+  padding-right: 25px;
+  max-width: 1280px;
+  top: 0; /* Position at the top of the page */
+  display: flex;
+  width: 100%; /* Full width */
+  background-color: white;
+  height: 65px;
+  border: 2px solid black;
+  color: black;
+  display: flex;
+  grid-gap: 30%;
+  align-items: center;
+  justify-content: center;
+  /* grid-template-columns: 1fr 1fr; */
+  /* grid-gap: 100px; */
+}
+
+.menuRightButton {
+  background-color: white;
+  border: white;
+  /* width: fit-content; */
+  /* align-items: center;
+  justify-content: center;
+  text-align: center; */
+  font-size: 16px;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.signin {
+  background-color: white;
+  border: 2px solid rgb(233, 177, 22);
+  border-radius: 24px;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 16px;
+}
+
+.signin:hover {
+  color: black;
+  background-color: rgb(233, 177, 22);
+}
+
+.menuRightButton:hover {
+  color: skyblue;
+}
+.right {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  grid-gap: 25px;
+  align-items: center;
+  justify-content: center;
+}
+
+.left {
+  /* display: flex; */
+  /* width: fit-content; */
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+footer {
+  background: rgb(97, 85, 109);
+  position: fixed;
+  display: flex;
+  left: 0px;
+  bottom: 0;
+  height: 30px;
+  width: 100%;
+  max-width: 1280px;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}

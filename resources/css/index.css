@@ -15,30 +15,29 @@ body {
 
 .container {
   max-width: 1280px;
-  height: 100vh;
-  width: 100vw;
-
-  background-color: rgba(0, 100, 100, 1);
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   /* grid-template-columns: 1fr 1fr; */
-  /* grid-gap: 100px; */
+  grid-gap: 100px;
   margin-bottom: 4%;
 }
 
 .menu {
   /* overflow: hidden; */
-  background-color: white;
-  color: black;
-
+  background-color: #333;
+  max-width: 1280px;
   top: 0; /* Position at the top of the page */
-  width: auto; /* Full width */
-  height: 65px;
-  border: 2px solid transparent;
-
   display: flex;
+  width: 100%; /* Full width */
+  background-color: white;
+  height: 65px;
+  border: 2px solid black;
+  color: black;
+  display: flex;
+  /* grid-gap: 30%; */
   align-items: center;
   justify-content: center;
   /* grid-template-columns: 1fr 1fr; */
@@ -67,13 +66,13 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 90%;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 25px;
   margin-right: 20px;
   font-size: 16px;
   padding: 0px 10px 0px 10px;
-  cursor: pointer;
 }
 
 .signin:hover {
@@ -89,6 +88,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 90%;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 25px;
@@ -102,33 +102,28 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: gray;
-  width: 7%;
-  text-align: center;
-  margin-left: 2%;
-  margin-top: -0.75%;
+  background-color: #f9f9f9;
+  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
 /* Links inside the dropdown */
-.dropdown-content + a {
+.dropdown-content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  width: fit-content;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content + a:hover {
-  background-color: white;
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
 }
 
 /* Show the dropdown menu on hover */
-.dropbtn:focus + .dropdown-content {
-  display: flex;
-  flex-direction: column;
+.dropbtn:hover .dropdown-content {
+  display: inline-block;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
@@ -143,10 +138,10 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
+  background-color: white;
   grid-gap: 25px;
   margin-left: 25px;
   margin-right: 25px;
-  margin-top: 2%;
   align-items: center;
   justify-content: center;
 }
@@ -154,61 +149,10 @@ body {
 .left {
   /* display: flex; */
   /* width: fit-content; */
+  background-color: white;
   width: 100%;
-  margin-top: 2%;
   align-items: center;
   justify-content: center;
-}
-
-.productContainer {
-  background-color: rgb(100, 200, 10);
-  border: 2px solid rgba(0, 0, 0, 0.5);
-}
-
-.searchContainer {
-  height: 50%;
-  background-color: rgb(249, 88, 59);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#search-text {
-  direction: rtl;
-  color: white;
-}
-
-#search-input {
-  width: 70%;
-  height: 30px;
-  border-radius: 24px;
-  color: black;
-  direction: rtl;
-}
-
-#search-btn {
-  background-color: rgb(255, 200, 10);
-  border-radius: 24px;
-  color: black;
-  width: 15%;
-  height: 50px;
-}
-
-#search-btn:hover {
-  box-shadow: 0 0 10px rgb(255, 160, 0);
-}
-
-#clock-img {
-  width: 50%;
-  height: auto;
-
-  position: relative;
-  bottom: 0px;
-}
-
-.productContainer {
-  height: 5 0%;
 }
 
 footer {
@@ -217,7 +161,7 @@ footer {
   position: fixed;
   display: flex;
   left: 0px;
-  bottom: 32px;
+  bottom: 0;
   height: 65px;
   width: 100%;
   max-width: 1280px;

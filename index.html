@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Store</title>
 
-        <link rel="stylesheet" href="assets/style/reset.css">
+        <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
 
@@ -15,11 +15,14 @@
             <div class="menu"> 
                 <div class="left" id="left">
                     <!-- <button type="button" class="signin" id = "signin">ورود/ثبت نام</button> -->
-                    <button class="dropbtn">Dropdown</button>
+                    <button class="dropbtn"> 
+                        <div class="arrow"></div>
+                        Dropdown
+                    </button>
+                    
                     <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                        <a href="#">پروفایل</a>
+                        <a href="#">خروج از حساب</a>
                     </div>
                 </div>
                
@@ -40,7 +43,18 @@
                 <button type="button" id="search-btn">جستجو کنید</button> 
                 <img src="assets/images/clock.png" id="clock-img">
             </div>
-            <div class="productContainer"> <p>productContainer</p>   
+            <div class="sortContainer"> 
+                <div class="left" id="left">
+                </div>
+                <div class="sortRight" id="sortRight">
+                    <button type="button" class="sortRightButton" id = "support">قیمت</button>
+                    <button type="button" class="sortRightButton" id = "page">بیشترین فروش</button>
+                    <div class="logo" id="logo" style="color: black; font-size: 16px; float: right;">:مرتب سازی بر اساس</div>   
+                </div>
+            </div>
+            <div class="productContainer">
+            <div class="left" id="left"></div>
+            <div class="sortRight" id="sortRight"></div>
             </div>
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
            

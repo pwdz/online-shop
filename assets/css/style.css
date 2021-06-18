@@ -97,7 +97,7 @@ body {
   font-size: 16px;
   padding: 0px 10px 0px 10px;
   display: flex;
-  grid-gap: 20px;
+  grid-gap: 20%;
   cursor: pointer;
 }
 
@@ -154,6 +154,10 @@ body {
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropbtn:hover {
+  background-color: rgb(233, 177, 22);
+}
+
+.dropbtn:focus {
   background-color: rgb(233, 177, 22);
 }
 
@@ -236,7 +240,7 @@ body {
   width: auto; /* Full width */
   height: 40px;
   border: 2px solid transparent;
-  margin: 10px 15px 10px 15px;
+  margin: 5px 15px 0px 15px;
   display: flex;
   flex-direction: row;
   align-items: right;
@@ -272,15 +276,86 @@ body {
 
 .productContainer {
   /* overflow: hidden; */
-  background-color: white;
+  background-color: lightgray;
   color: black;
   top: 0; /* Position at the top of the page */
   width: auto; /* Full width */
-  height: 40px;
+  height: fit-content;
   border: 2px solid transparent;
-  margin: 10px 15px 10px 15px;
+  margin: 5px 15px 0px 15px;
   display: flex;
   flex-direction: row;
+  grid-gap: 10%;
+  align-items: right;
+  justify-content: c;
+}
+
+.pcRight {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5%;
+  width: 40%;
+  text-align: right;
+  align-items: right;
+  justify-content: right;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  /* grid-gap: 20%; */
+  background-color: lightgray;
+  align-items: right;
+  justify-content: right;
+}
+
+.header {
+  color: black;
+  padding: 2%;
+  font-size: 16px;
+  float: right;
+  background-color: white;
+  width: auto;
+  height: 200%;
+}
+
+input[type="radio"]:after {
+  width: 50%;
+  height: 50%;
+  border-radius: 15px;
+  top: -20%;
+  bottom: 10%;
+  right: 15%;
+  vertical-align: middle;
+  position: relative;
+  background-color: white;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  /* border: 1px solid #d1d3d1; */
+}
+
+input[type="radio"]:checked:after {
+  width: 50%;
+  height: 50%;
+  border-radius: 15px;
+  top: -20%;
+  bottom: 10%;
+  right: 10%;
+  vertical-align: middle;
+  position: relative;
+  background-color: rgb(0, 119, 255);
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid transparent;
+}
+
+.priceRange {
+  display: flex;
+  flex-direction: column;
+  /* grid-gap: 20%; */
+  background-color: lightgray;
   align-items: right;
   justify-content: right;
 }

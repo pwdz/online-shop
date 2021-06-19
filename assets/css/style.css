@@ -6,8 +6,9 @@
   --orange-hero-header: rgb(249, 88, 59);
   --dark-grey-text: rgb(69, 69, 69);
   --light-grey-text: rgb(179, 179, 179);
-  --buy-btn: rgb(0, 157, 255);
+  --blue-btn: rgb(0, 157, 255);
   --price-text: rgb(168, 168, 168);
+  --blue-btn-shadow: 0 5px 5px rgba(0, 157, 255, 0.616);
   --product-cell-height: 300px;
 }
 
@@ -319,8 +320,8 @@ body {
 }
 
 .sortRightButton:focus {
-  background-color: rgb(0, 119, 255);
-  box-shadow: 0 0 10px rgb(67, 137, 243);
+  background-color: var(--blue-btn);
+  box-shadow: var(--blue-btn-shadow);
   color:var(--white);
 }
 
@@ -486,10 +487,10 @@ hr.solid {
   width: 40%;
   height: 50%;
   color: var(--white);
-  background-color: var(--buy-btn);
+  background-color: var(--blue-btn);
   border-radius: var(--default-radius);
   border: none;
-  box-shadow: 0 5px 5px rgba(0, 157, 255, 0.616);
+  box-shadow: var(--blue-btn-shadow);
   margin-right: 15px;
 }
 .price{

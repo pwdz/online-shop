@@ -496,6 +496,8 @@ hr.solid {
 .price{
   margin-left: 15px;
   color: var(--price-text);
+  direction: rtl;
+  font-weight: bold;
 }
 
 

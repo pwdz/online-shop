@@ -1,3 +1,11 @@
+:root {
+  --default-font-size: 16px;
+  --default-radius: 24px;
+  --white: white;
+  --yellow-search-btn: rgb(255, 200, 10);
+  --orange-hero-header: rgb(249, 88, 59);
+}
+
 body {
   /* background: url("../img/github-logo.png") no-repeat center / cover; */
   /* background-color: rgba(45, 46, 131, 0.637); */
@@ -31,7 +39,7 @@ body {
 
 .menu {
   /* overflow: hidden; */
-  background-color: white;
+  background-color: var(--white);
   color: black;
 
   top: 0; /* Position at the top of the page */
@@ -47,8 +55,8 @@ body {
 }
 
 .menuRightButton {
-  background-color: white;
-  border: white;
+  background-color: var(--white);
+  border:var(--white);
   display: inline-block;
   white-space: nowrap;
   text-align: center;
@@ -61,7 +69,7 @@ body {
 }
 
 .signin {
-  background-color: white;
+  background-color: var(--white);
   border: 2px solid rgb(233, 177, 22);
   border-radius: 24px;
   width: fit-content;
@@ -83,7 +91,7 @@ body {
 }
 
 .dropbtn {
-  background-color: white;
+  background-color:var(--white);
   border: 2px solid rgb(233, 177, 22);
   border-radius: 24px;
   width: fit-content;
@@ -191,51 +199,69 @@ body {
 }
 
 .searchContainer {
-  height: 50%;
-  background-color: rgb(249, 88, 59);
-
+  /* height: 50%; */
+  background-color: var(--orange-hero-header);
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 #search-text {
   direction: rtl;
-  color: white;
+  color:var(--white);
+  font-size: calc(2 * var(--default-font-size));
+  margin-top: 100px;
 }
 
 #search-input {
-  width: 70%;
+  width: 65%;
   height: 30px;
-  border-radius: 24px;
-  color: black;
+  border-radius: var(--default-radius);
+  color: rgba(194, 195, 197);
+  font-weight: bold;
   direction: rtl;
+  margin-top: 40px;
+
+  text-align: center;
+}
+
+#search-input:focus{
+  /* outline: 2px solid orange;     oranges! yey */
+  color: black;
+  
 }
 
 #search-btn {
-  background-color: rgb(255, 200, 10);
-  border-radius: 24px;
+  background-color: var(--yellow-search-btn);
+  border-radius: var(--default-radius);
+  /* font-weight: bold; */
+  font-size: calc(1.1 * var(--default-font-size));
   color: black;
+    border: none;
+
   width: 15%;
   height: 50px;
+  margin-top: 35px;
 }
 
 #search-btn:hover {
-  box-shadow: 0 0 10px rgb(255, 160, 0);
+  box-shadow: 0px 0px 20px rgb(255, 162, 0);
 }
 
 #clock-img {
   width: 50%;
   height: auto;
 
-  position: absolute;
-  bottom: 0px;
+  margin-top: 35px;
+  /* position: absolute; */
+  /* bottom: 0px; */
 }
 
 .sortContainer {
   /* overflow: hidden; */
-  background-color: white;
+  background-color:var(--white);
   color: black;
   top: 0; /* Position at the top of the page */
   width: auto; /* Full width */
@@ -272,7 +298,7 @@ body {
 .sortRightButton:focus {
   background-color: rgb(0, 119, 255);
   box-shadow: 0 0 10px rgb(67, 137, 243);
-  color: white;
+  color:var(--white);
 }
 
 .productContainer {
@@ -321,7 +347,7 @@ body {
   padding: 2%;
   font-size: 16px;
   float: right;
-  background-color: white;
+  background-color:var(--white);
   width: auto;
   height: 20%;
   justify-content: center;
@@ -337,7 +363,7 @@ input[type="radio"]:after {
   right: 15%;
   vertical-align: middle;
   position: relative;
-  background-color: white;
+  background-color: var(--white);
   content: "";
   display: inline-block;
   visibility: visible;

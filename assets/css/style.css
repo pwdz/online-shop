@@ -8,7 +8,9 @@
   --light-grey-text: rgb(179, 179, 179);
   --blue-btn: rgb(0, 157, 255);
   --price-text: rgb(168, 168, 168);
-  --blue-btn-shadow: 0 5px 5px rgba(0, 157, 255, 0.616);
+
+  --yellow-btn-shadow: 0px 5px 15px rgb(255, 162, 0);
+  --blue-btn-shadow: 0px 5px 5px rgba(0, 157, 255, 0.616);
   --product-cell-height: 300px;
 }
 
@@ -271,7 +273,7 @@ body {
 }
 
 #search-btn:hover {
-  box-shadow: 0px 0px 20px rgb(255, 162, 0);
+  box-shadow: var(--yellow-btn-shadow);
 }
 
 #clock-img {

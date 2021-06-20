@@ -8,8 +8,9 @@
   --light-grey-text: rgb(179, 179, 179);
   --blue-btn: rgb(0, 157, 255);
   --price-text: rgb(168, 168, 168);
+  --default-grey-background: rgb(232, 233, 237);
 
-  --yellow-btn-shadow: 0px 5px 15px rgb(255, 162, 0);
+  --yellow-btn-shadow: 0px 3px 10px rgba(255, 162, 0, 0.692);
   --blue-btn-shadow: 0px 5px 5px rgba(0, 157, 255, 0.616);
   --product-cell-height: 300px;
 }
@@ -260,21 +261,25 @@ body {
 }
 
 #search-btn {
-  background-color: var(--yellow-search-btn);
-  border-radius: var(--default-radius);
-  /* font-weight: bold; */
-  font-size: calc(1.1 * var(--default-font-size));
-  color: black;
-  border: none;
-
   width: 15%;
   height: 50px;
   margin-top: 35px;
 }
 
-#search-btn:hover {
+.yellowBtn{
+  background-color: var(--yellow-search-btn);
+  border-radius: var(--default-radius);
+
+  font-size: calc(1.1 * var(--default-font-size));
+  color: black;
+  border: none;
+}
+
+.yellowBtn:hover {
   box-shadow: var(--yellow-btn-shadow);
 }
+
+
 
 #clock-img {
   width: 50%;
@@ -471,7 +476,7 @@ hr.solid {
   /* border: 3px solid black; */
   width: 85%;
   height: 1px;
-  background-color: lightgrey;
+  background-color: var(--default-grey-background);
   border: none
 
 }

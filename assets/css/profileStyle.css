@@ -1,0 +1,77 @@
+.profileContainer{
+  height: 100%;
+  width: 100%;
+
+  background-color: rgb(247, 247, 247);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.topDiv{
+  width: 100%;
+  height: 10%;
+  margin-top: 15%;
+  /* background-color: brown; */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  direction: rtl;
+}
+.verticalSeparator{
+  width: 2px;
+  height: 30%;
+  background-color: black;
+
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.bigText{
+  font-size: calc(1.8* var(--default-font-size));
+}
+
+#balance-btn{
+  font-size: calc(0.8 * var(--default-font-size));
+  font-weight: bold;
+  margin-right: 10px;
+
+  width: 8%;
+  height: 30%;
+}
+
+.tabContainer{
+  width: 30%;
+  height: 4%;
+  border-radius: 30px;
+  border: 2px solid rgb(238, 238, 238); 
+
+  display: flex;
+  flex-direction: row;
+}
+
+.tabBtn{
+  width: 50%;
+  height: 100%;
+  border: none;
+  color: rgb(238, 238, 238); 
+  background-color: rgb(247, 247, 247);
+
+  font-weight: 600;
+}
+
+#profileTab{
+  background-color:rgb(238, 238, 238); 
+  color: rgb(54, 54, 54);
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+#receiptsTab{
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  color: rgb(159, 163, 167);
+}

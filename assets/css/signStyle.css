@@ -1,3 +1,20 @@
+.signDiv {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+.signupDiv {
+  flex-direction: row;
+  grid-gap: 40px;
+}
+
+.signinDiv {
+  flex-direction: column;
+  grid-gap: 10px;
+}
+
 .signupContainer {
   height: 100%;
   background-color: lightgray;
@@ -16,24 +33,48 @@
   justify-content: center;
   text-align: center;
   justify-self: center;
+  width: 100%;
+}
+
+.signupHolderM {
+  width: 30%;
+}
+
+.addrHolder {
+  width: 59%;
+  justify-content: start;
+}
+
+.signinHolderM {
+  width: 20%;
+}
+
+.endInputDiv {
+  justify-content: flex-end;
+}
+
+.startInputDiv {
+  justify-content: flex-start;
 }
 
 ::placeholder {
   color: rgb(167, 161, 161);
 }
 
-input[type="password"],
-input[type="email"] {
+input,
+textarea {
   direction: rtl;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
-  width: 20%;
-  height: 85%;
-  border: 2px solid transparent;
+  height: 100%;
+  width: 50%;
+  border: none;
+  border-right: 5px solid transparent;
+  font-size: calc(0.9 * var(--default-font-size));
+  resize: none;
 }
 
-input[type="password"]:focus,
-input[type="email"]:focus,
+input:focus,
 textarea:focus {
   outline: none;
 }
@@ -42,13 +83,18 @@ textarea:focus {
   background-color: rgb(14, 186, 197);
   color: white;
   padding: 1% 1% 1% 1%;
-  width: 5%;
   align-items: center;
   justify-content: center;
   text-align: center;
   justify-self: center;
+  width: 5vw;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.tagAddr {
+  width: 5%;
+  padding: 2% 1% 2% 1%;
 }
 
 .signupBtn {

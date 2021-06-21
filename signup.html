@@ -44,21 +44,38 @@
                 
             </div>
             <div class="signupContainer">
-                <div class="logo" id="logo" style="color: rgb(14, 186, 197); font-size: 40px;"> فروشگاه - ورود</div>  
+                <div class="logo" id="logo" style="color: rgb(14, 186, 197); font-size: 40px;"> فروشگاه - ثبت نام</div>  
                 <div class="signDiv signinDiv">
-                    <div class="inputDiv">
-                        <input type="email" class="signinHolderM" name="email" required  id="email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="ایمیل خود را وارد کنید..."></input>
-                        <div class="tag tagIn">ایمیل</div>
+                    <div class="signDiv signupDiv" >
+                        <div class="inputDiv endInputDiv">
+                            <input type="text" required placeholder=" نام خانوادگی خود را وارد کنید..."></input>
+                            <div class="tag tagUp"> نام خانوادگی</div>
+                        </div>
+                        <div class="inputDiv startInputDiv">
+                            <input  type="text" placeholder=" نام خود را وارد کنید..."></input>
+                            <div class="tag tagUp">نام</div>
+                        </div>
                     </div>
-                    <div class="inputDiv">
-                        <input type="password" class="signinHolderM" id="pass" name="password"
-                        minlength="6" required placeholder="رمزعبور خود را وارد کنید..."></input>
-                        <div class="tag tagIn">رمزعبور</div>
+                    <div class="signDiv signupDiv">
+                        <div class="inputDiv endInputDiv">
+                            <input type="password"  id="pass" name="password"
+                            minlength="6" required placeholder="رمزعبور خود را وارد کنید..."></input>
+                            <div class="tag tagUp">رمزعبور</div>
+                        </div>
+                        <div class="inputDiv startInputDiv">
+                            <input type="email" name="email" required  id="email" placeholder="ایمیل خود را وارد کنید..."></input>
+                            <div class="tag">ایمیل</div>
+                        </div>
+                    </div>
+                    <div class="signDiv signupDiv">
+                        <div class="inputDiv">
+                            <textarea  class="addrHolder" required name="address" cols="40" rows="3" id="address" placeholder=" آدرس خود را وارد کنید..."></textarea>
+                            <div class="tag tagAddr">آدرس</div>
+                        </div>
                     </div>
                 </div>
                 
-                <button type="button" class="signupBtn" id = "signupBtn">ورود</button>
-                <a href="#">اگر حساب کاربری ندارید کلیک کنید</a>
+                <button type="button" class="signupBtn" id = "signupBtn">ثبت نام</button>
             
             </div>
             

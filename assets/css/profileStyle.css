@@ -1,4 +1,4 @@
-.profileContainer{
+.profileContainer {
   height: 100%;
   width: 100%;
 
@@ -6,10 +6,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
-.topDiv{
+.topDiv {
   width: 100%;
   height: 10%;
   margin-top: 15%;
@@ -22,7 +21,7 @@
 
   direction: rtl;
 }
-.verticalSeparator{
+.verticalSeparator {
   width: 2px;
   height: 30%;
   background-color: black;
@@ -30,11 +29,11 @@
   margin-left: 10px;
   margin-right: 10px;
 }
-.bigText{
-  font-size: calc(1.8* var(--default-font-size));
+.bigText {
+  font-size: calc(1.8 * var(--default-font-size));
 }
 
-#balance-btn{
+#balance-btn {
   font-size: calc(0.8 * var(--default-font-size));
   font-weight: bold;
   margin-right: 10px;
@@ -43,40 +42,49 @@
   height: 30%;
 }
 
-.tabContainer{
+.tabContainer {
   width: 30%;
   height: 4%;
   border-radius: 30px;
-  border: 2px solid rgb(238, 238, 238); 
+  border: 2px solid rgb(238, 238, 238);
 
   display: flex;
   flex-direction: row;
 }
 
-.tabBtn{
+.tabBtn {
   width: 50%;
   height: 100%;
   border: none;
-  color: rgb(238, 238, 238); 
+  color: rgb(238, 238, 238);
   background-color: rgb(247, 247, 247);
-
   font-weight: 600;
 }
 
-#profileTab{
-  background-color:rgb(238, 238, 238); 
+.tabBtn:focus {
+  background-color: rgb(238, 238, 238);
+  color: rgb(54, 54, 54);
+}
+
+#profileTab {
+  background-color: rgb(238, 238, 238);
   color: rgb(54, 54, 54);
   border-bottom-right-radius: 30px;
   border-top-right-radius: 30px;
 }
 
-#receiptsTab{
+#receiptsTab {
   border-bottom-left-radius: 30px;
   border-top-left-radius: 30px;
   color: rgb(159, 163, 167);
 }
 
-.inputFieldsContainer{
+#receiptsTab:focus {
+  background-color: rgb(238, 238, 238);
+  color: black;
+}
+
+.inputFieldsContainer {
   width: 60%;
   height: 25%;
 
@@ -86,10 +94,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
-.pairContainer{
+.pairContainer {
   width: 100%;
   height: 20%;
 
@@ -98,40 +105,41 @@
   margin-bottom: 10px;
 }
 
-.inputDiv{
+.inputDiv {
   width: calc((100% - 20px) / 2);
   height: 100%;
   display: flex;
   flex-direction: row;
 }
-.rMargin{
+.rMargin {
   margin-right: 20px;
 }
 
-.bMargin{
+.bMargin {
   margin-bottom: 10px;
 }
 
-.bigW{
+.bigW {
   width: 100%;
 }
 
-.bigH{
+.bigH {
   height: 32%;
 }
 
-.normalH{
+.normalH {
   height: 20%;
 }
 
-#modifyBtn{
+#modifyBtn {
   width: 10%;
   height: 4%;
-  font-size: calc(0.9*var(--default-font-size));
+  font-size: calc(0.9 * var(--default-font-size));
   font-weight: bold;
 }
 
-input, textarea{
+input,
+textarea {
   direction: rtl;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
@@ -149,7 +157,7 @@ textarea:focus {
   outline: none;
 }
 
-.tag{
+.tag {
   background-color: rgb(14, 186, 197);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;

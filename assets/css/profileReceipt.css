@@ -41,6 +41,24 @@
   background-color: white;
 }
 
+.srchHolder {
+  width: 50%;
+  height: 38%;
+  /* color: rgba(194, 195, 197); */
+  direction: rtl;
+  margin-top: 40px;
+  border: none;
+  padding: auto;
+  text-align: center;
+}
+
+.searchButton {
+  border: transparent;
+  color: var(--white);
+  width: 30%;
+  height: 38%;
+  margin-top: 6%;
+}
 /* .styled-table tbody tr:last-of-type {
   border-bottom: 2px solid var(--default-grey-background);
 } */

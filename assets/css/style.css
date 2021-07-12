@@ -15,7 +15,7 @@
   --product-cell-height: 300px;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: BYekan, "BYekan", tahoma;
@@ -32,7 +32,7 @@ body {
   justify-content: center;
   /* font-family: "IRAN Sans"; */
 
-	font-family: BYekan,'BYekan',Arial;
+  font-family: BYekan, "BYekan", Arial;
   /* to always keep everything centered */
   position: fixed;
   top: 50%;
@@ -75,7 +75,7 @@ body {
 
 .menuRightButton {
   background-color: var(--white);
-  border:var(--white);
+  border: var(--white);
   display: inline-block;
   white-space: nowrap;
   text-align: center;
@@ -110,7 +110,7 @@ body {
 }
 
 .dropbtn {
-  background-color:var(--white);
+  background-color: var(--white);
   border: 2px solid rgb(233, 177, 22);
   border-radius: 24px;
   width: fit-content;
@@ -232,13 +232,13 @@ body {
 
 #search-text {
   direction: rtl;
-  color:var(--white);
+  color: var(--white);
   font-size: calc(2 * var(--default-font-size));
   margin-top: 100px;
-  
+
   /* font-family: Arial, Helvetica, sans-serif; */
 
-	/* font-family: BYekan,'BYekan',Arial; */
+  /* font-family: BYekan,'BYekan',Arial; */
 }
 
 #search-input {
@@ -254,10 +254,9 @@ body {
   text-align: center;
 }
 
-#search-input:focus{
+#search-input:focus {
   /* outline: 2px solid orange;     oranges! yey */
   color: black;
-
 }
 
 #search-btn {
@@ -266,7 +265,7 @@ body {
   margin-top: 35px;
 }
 
-.yellowBtn{
+.yellowBtn {
   background-color: var(--yellow-search-btn);
   border-radius: var(--default-radius);
 
@@ -279,8 +278,6 @@ body {
   box-shadow: var(--yellow-btn-shadow);
 }
 
-
-
 #clock-img {
   width: 50%;
   height: auto;
@@ -292,7 +289,7 @@ body {
 
 .sortContainer {
   /* overflow: hidden; */
-  background-color:var(--white);
+  background-color: var(--white);
   color: black;
   top: 0; /* Position at the top of the page */
   width: auto; /* Full width */
@@ -329,7 +326,7 @@ body {
 .sortRightButton:focus {
   background-color: var(--blue-btn);
   box-shadow: var(--blue-btn-shadow);
-  color:var(--white);
+  color: var(--white);
 }
 
 .productContainer {
@@ -359,7 +356,7 @@ body {
   justify-content: right;
 }
 
-.pcleft{
+.pcleft {
   width: 75%;
   display: flex;
   flex-direction: row;
@@ -386,18 +383,18 @@ body {
   padding: 2%;
   font-size: 16px;
   float: right;
-  background-color:var(--white);
+  background-color: var(--white);
   width: auto;
   height: 20%;
   justify-content: center;
   padding-top: 3%;
 }
 
-input[type="radio"]:after {
+input[type="radio"]::after {
   width: 50%;
   height: 50%;
   border-radius: 15px;
-  top: -20%;
+  top: -50%;
   bottom: 10%;
   right: 15%;
   vertical-align: middle;
@@ -406,19 +403,19 @@ input[type="radio"]:after {
   content: "";
   display: inline-block;
   visibility: visible;
-  /* border: 1px solid #d1d3d1; */
+  border: 2px solid #d1d3d1;
 }
 
-input[type="radio"]:checked:after {
+input[type="radio"]:checked::after {
   width: 50%;
   height: 50%;
-  border-radius: 15px;
-  top: -20%;
+  border-radius: 70%;
+  top: -50%;
   bottom: 10%;
   right: 10%;
   vertical-align: middle;
   position: relative;
-  background-color: rgb(0, 119, 255);
+  background-color: var(--blue-btn);
   content: "";
   display: inline-block;
   visibility: visible;
@@ -428,14 +425,14 @@ input[type="radio"]:checked:after {
 .priceRange {
   display: flex;
   flex-direction: column;
-  /* grid-gap: 20%; */
+  grid-gap: 2%;
   background-color: lightgray;
   align-items: right;
   justify-content: right;
 }
 
 .product {
-  width: calc((100% - 45px)/3);
+  width: calc((100% - 45px) / 3);
   height: 300px;
   background-color: var(--white);
 
@@ -446,13 +443,13 @@ input[type="radio"]:checked:after {
   flex-direction: column;
   align-items: center;
 }
-.productImage{
+.productImage {
   width: calc(var(--product-cell-height) * 0.35);
   height: calc(var(--product-cell-height) * 0.4);
 
   margin-top: 15px;
 }
-.productNameCat{
+.productNameCat {
   width: 100%;
   height: 30%;
   /* background-color:aqua; */
@@ -460,7 +457,7 @@ input[type="radio"]:checked:after {
   display: flex;
   flex-direction: column;
 }
-.productName{
+.productName {
   margin-top: 20px;
   margin-right: 15px;
   margin-bottom: 10px;
@@ -468,7 +465,7 @@ input[type="radio"]:checked:after {
   font-weight: bold;
   color: var(--dark-grey-text);
 }
-.productCat{
+.productCat {
   margin-right: 15px;
   color: var(--light-grey-text);
 }
@@ -477,10 +474,9 @@ hr.solid {
   width: 85%;
   height: 1px;
   background-color: var(--default-grey-background);
-  border: none
-
+  border: none;
 }
-.productPriceBuy{
+.productPriceBuy {
   width: 100%;
   flex-grow: 1; /* stretch to fill the rest of the remaining height of the parent */
   /* background-color: brown; */
@@ -490,7 +486,7 @@ hr.solid {
   align-items: center;
   justify-content: center;
 }
-#buy-btn{
+#buy-btn {
   width: 40%;
   height: 50%;
   color: var(--white);
@@ -500,13 +496,83 @@ hr.solid {
   box-shadow: var(--blue-btn-shadow);
   margin-right: 15px;
 }
-.price{
+.price {
   margin-left: 15px;
   color: var(--price-text);
   direction: rtl;
   font-weight: bold;
 }
 
+.slidecontainer {
+  /* width: 100%; Width of the outside container */
+  background-color: white;
+  padding: 10% 2% 10% 2%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 20%;
+  height: 5px;
+  margin-left: -21.5%;
+  position: absolute;
+  background: lightgray;
+  outline: none;
+}
+
+.slider input {
+  pointer-events: none;
+  position: absolute;
+  overflow: hidden;
+  left: 25%;
+  top: 15px;
+  width: 50%;
+  outline: none;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  background: var(--blue-btn);
+  cursor: pointer;
+
+  pointer-events: all;
+  position: relative;
+  z-index: 1;
+  outline: 0;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--blue-btn);
+  cursor: pointer;
+
+  pointer-events: all;
+  position: relative;
+  z-index: 10;
+  -moz-appearance: none;
+  width: 9px;
+}
+
+.slider input::-moz-range-track {
+  position: relative;
+  z-index: -1;
+  border: 0;
+}
+.slider input:last-of-type::-moz-range-track {
+  -moz-appearance: none;
+  background: none transparent;
+  border: 0;
+}
+.slider input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
 
 footer {
   background: rgb(49, 59, 54);

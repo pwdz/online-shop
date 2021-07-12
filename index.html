@@ -129,7 +129,7 @@
                             <p style="margin-top: 2%;">
                                 <label><input type="radio" />دسته بندی یک</label>
                             </p>
-                            <p style="margin-top: 2%;">
+                            <p style="margin-top: 2%; margin-bottom: 2%;">
                                 <label><input type="radio" />دسته بندی یک</label>
                             </p>
                         </form>
@@ -137,8 +137,22 @@
                     
                     <div class="priceRange" id="priceRange">
                             <div class="header" id="header"> تنظیم قیمت کالا</div> 
+                            <form>
+                            <div class="slidecontainer">
+                                <input type="range" min="1" max="100" value="20" class="slider" id="lowe">
+                                <input type="range" min="1" max="100" value="80" class="slider" id="higher">
+                                <!-- <input id="minAmount" type="number" value="20" min="1" max="100" oninput="minRange.value=minAmount.value" />
+                                <input id="maxAmount" type="number" value="80" min="1" max="100" oninput="maxRange.value=maxAmount.value" style="direction: rtl;" /> -->
+                              </div>
+                            </form>
                     </div>
                 </div>
+                <!-- <form>
+                    <div>
+                      <input id="rangeInput" type="range" min="0" max="200"  />
+                      <input id="amount" type="number" value="100" min="0" max="200" oninput="rangeInput.value=amount.value" />
+                    </div>
+                  </form> -->
             </div>
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
            

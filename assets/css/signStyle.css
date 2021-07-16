@@ -49,6 +49,10 @@
   width: 20%;
 }
 
+.tagHeight {
+  height: 70%;
+} /*for the problem*/
+
 .endInputDiv {
   justify-content: flex-end;
 }
@@ -73,6 +77,24 @@ textarea {
   font-size: calc(0.9 * var(--default-font-size));
   resize: none;
 }
+.errormsg {
+  color: red;
+  background-color: transparent;
+  display: flex;
+  width: 100%;
+  align-self: flex-end;
+  /* text-align: right; */
+}
+
+.errorContainer {
+  display: flex;
+  width: 52%;
+  align-self: center;
+  direction: row;
+  justify-content: flex-end;
+  flex-direction: row;
+  grid-gap: 50%;
+}
 
 input:focus,
 textarea:focus {
@@ -87,7 +109,7 @@ textarea:focus {
   justify-content: center;
   text-align: center;
   justify-self: center;
-  width: 5vw;
+  width: 12.5%;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }

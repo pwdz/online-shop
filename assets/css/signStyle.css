@@ -96,6 +96,10 @@ textarea {
   grid-gap: 50%;
 }
 
+.marginRight {
+  margin-right: 46%;
+}
+
 input:focus,
 textarea:focus {
   outline: none;

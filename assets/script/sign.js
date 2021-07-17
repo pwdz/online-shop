@@ -27,8 +27,6 @@ function validateNullField(value, err, msg) {
 }
 
 function validate(errID, value, errTopic, maxCharNum, regex) {
-    console.log(value);
-    console.log(regex);
     const err = document.getElementById(errID);
     err.innerText = "";
     let isValid = validateNullField(value, err, errTopic);
@@ -58,6 +56,12 @@ function validatePassword() {
     return valid;
 }
 
+function validateInPassword() {
+    const valid = validate("passworderror", fixNumbers(password.value), "رمز عبور", maxChar);
+    password.style.borderColor = valid ? 'green' : 'red';
+    return valid;
+}
+
 function validateName() {
     const valid = validate("nameerror", firstname.value.trim(), "نام", maxChar);
     firstname.style.borderColor = valid ? 'green' : 'red';
@@ -75,3 +79,19 @@ function validateAddr() {
     address.style.borderColor = valid ? 'green' : 'red';
     return valid;
 }
+
+function checkFinalUpValidation() {
+    const addrValid = validateAddr();
+    const nameValid = validateName();
+    const lastnameValid = validateLastName();
+    const passwordValid = validatePassword();
+    const emailValid = validateEmail();
+    return addrValid & nameValid & lastnameValid & passwordValid & emailValid;
+}
+
+function checkFinalInValidation() {
+    const passwordValid = validateInPassword();
+    const emailValid = validateEmail();
+    return passwordValid & emailValid;
+}
+

@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/signStyle.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/modal.css">
+        
     </head>
 
     
@@ -43,6 +45,13 @@
                 </div>
                 
             </div>
+            <div class="modal" id="myModal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span class="close" onclick="clickSpanBtn();">&times;</span>
+                  <p id="contentText"></p>
+                </div>
+            </div>
             <div class="signupContainer">
                 <div class="logo" id="logo" style="color: rgb(14, 186, 197); font-size: 40px;"> فروشگاه - ورود</div>  
                 <div class="signDiv signinDiv">
@@ -50,23 +59,29 @@
                         <input type="email" class="signinHolderM" name="email" required  id="email" onfocus="validateEmail()" onkeypress="validateEmail()"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="ایمیل خود را وارد کنید..."></input>
                         <div class="tag tagIn">ایمیل</div>
                     </div>
+                    <div class="errorContainer marginRight">
+                        <div  class="errormsg endInputDiv" id="emailerror"></div>
+                    </div>
                     <div class="inputDiv">
                         <input type="password" class="signinHolderM" id="pass" name="password"
-                        minlength="8" required onfocus="validatePassword()" onkeypress="validatePassword()" placeholder="رمزعبور خود را وارد کنید..."></input>
+                        minlength="8" required onfocus="validateInPassword()" onkeypress="validateInPassword()" placeholder="رمزعبور خود را وارد کنید..."></input>
                         <div class="tag tagIn">رمزعبور</div>
+                    </div>
+                    <div class="errorContainer marginRight">
+                        <div  class="errormsg endInputDiv" id="passworderror"></div>
                     </div>
                 </div>
                 
-                <button type="button" class="signupBtn" id = "signupBtn">ورود</button>
+                <button type="button" class="signupBtn" data-toggle="modal" onclick="clickSignInBtn();" data-target="#myModal" id ="signInBtn">ورود</button>
                 <a href="#">اگر حساب کاربری ندارید کلیک کنید</a>
             
             </div>
-            
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
            
         </section>
         <!-- Adding sthe script to html file -->
         <script src="assets/script/sign.js"></script>
+        <script src="assets/script/modal.js"></script>
     </body>    </html>
 
 

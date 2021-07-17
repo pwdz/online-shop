@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/signStyle.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/modal.css">
     </head>
 
     
@@ -42,6 +43,14 @@
                     <div class="logo" id="logo" style="color: skyblue; font-size: 19.2px;">فروشگاه</div>   
                 </div>
                 
+            </div>
+            <div class="modal" id="myModal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span class="close" onclick="clickSpanBtn();">&times;</span>
+                  <p id="contentText"></p>
+                </div>
+              
             </div>
             <div class="signupContainer">
                 <div class="logo" id="logo" style="color: rgb(14, 186, 197); font-size: 40px;"> فروشگاه - ثبت نام</div>  
@@ -86,16 +95,14 @@
                         <div  class="errormsg" style="margin-left:40%;" id="addresserror"></div>
                     </div>
                 </div>
-                
-                <button type="button" class="signupBtn" id = "signupBtn" onclick="validateEmail();">ثبت نام</button>
-            
+                <button type="button" class="signupBtn" onclick="clickSignUpBtn();" data-toggle="modal" data-target="#myModal" id = "signupBtn">ثبت نام</button>
             </div>
-            
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
            
         </section>
         <!-- Adding sthe script to html file -->
         <script src="assets/script/sign.js"></script>
+        <script src="assets/script/modal.js"></script>
     </body>    </html>
 
 

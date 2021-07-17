@@ -1,5 +1,3 @@
-// let email = document.getElementById("email");
-
 const data = [
     {
         email: "rozhin@email.com",
@@ -19,6 +17,7 @@ const data = [
 // Get the modal
 const modal = document.getElementById("myModal");
 const modalText = document.getElementById("contentText");
+const modalContent = document.getElementById("modal-content");
 
 // When the user clicks on the button, open the modal
 function clickSignUpBtn() {
@@ -62,10 +61,17 @@ function clickSignInBtn() {
     modalText.style.color = textColor;
     modalText.style.marginRight = "5%";
     modal.style.display = "block";
-    modal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 function clickSpanBtn() {
+    modal.style.animationName = "fadeOut_Modal";
+    modalContent.style.animationName = "fadeOut_Container";
+    modal.addEventListener('animationend', animationEndCallback);
+    // modal.style.display = "none";
+
+}
+
+animationEndCallback = (e) => {
     modal.style.display = "none";
 }

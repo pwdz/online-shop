@@ -1,0 +1,220 @@
+.profileContainer {
+  height: 100%;
+  width: 100%;
+
+  background-color: rgb(247, 247, 247);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.receiptSearchContainer {
+  /* height: 50%; */
+  width: 50%;
+  background-color: transparent;
+  display: flex;
+  /* position: relative; */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.topDiv {
+  width: 100%;
+  height: 10%;
+  margin-top: 15%;
+  /* background-color: brown; */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  direction: rtl;
+}
+
+.mainTmargin {
+  margin-top: 2%;
+}
+
+.subTmargin {
+  margin-top: 3% !important;
+}
+
+.errormsg {
+  color: red;
+  background-color: transparent;
+  display: flex;
+  width: 100%;
+  align-self: flex-end;
+  margin-bottom: 2%;
+  /* text-align: right; */
+}
+
+.rightM {
+  margin-right: -40%;
+}
+
+.errorContainer {
+  display: flex;
+  width: 85%;
+  align-self: center;
+  direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  grid-gap: 30%;
+  /* padding-right: 10%;
+  padding-left: 20%; */
+}
+
+.verticalSeparator {
+  width: 2px;
+  height: 30%;
+  background-color: black;
+
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.bigText {
+  font-size: calc(1.8 * var(--default-font-size));
+}
+
+#balance-btn {
+  font-size: calc(0.8 * var(--default-font-size));
+  font-weight: bold;
+  margin-right: 10px;
+
+  width: 8%;
+  height: 30%;
+}
+
+.tabContainer {
+  width: 30%;
+  height: 4%;
+  border-radius: 30px;
+  border: 2px solid rgb(238, 238, 238);
+
+  display: flex;
+  flex-direction: row;
+}
+
+.tabBtn {
+  width: 50%;
+  height: 100%;
+  border: none;
+  color: rgb(238, 238, 238);
+  background-color: rgb(247, 247, 247);
+  font-weight: 600;
+}
+
+.tabBtn:focus {
+  background-color: rgb(238, 238, 238);
+  color: rgb(54, 54, 54);
+}
+
+#profileTab {
+  background-color: rgb(238, 238, 238);
+  color: rgb(54, 54, 54);
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+#receiptsTab {
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  color: rgb(159, 163, 167);
+}
+
+#receiptsTab:focus {
+  background-color: rgb(238, 238, 238);
+  color: black;
+}
+
+.inputFieldsContainer {
+  width: 60%;
+  height: 25%;
+  margin-bottom: 3%;
+  margin-top: 45px;
+
+  /* background-color: brown; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pairContainer {
+  width: 100%;
+  height: 20%;
+
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.inputDiv {
+  width: calc((100% - 20px) / 2);
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.rMargin {
+  margin-right: 20px;
+}
+
+.bMargin {
+  margin-bottom: 10px;
+}
+
+.bigW {
+  width: 100%;
+}
+
+.bigH {
+  height: 32%;
+}
+
+.normalH {
+  height: 20%;
+}
+
+#modifyBtn {
+  width: 10%;
+  height: 4%;
+  font-size: calc(0.9 * var(--default-font-size));
+  font-weight: bold;
+  /* margin-top: 5%; */
+}
+
+input,
+textarea {
+  direction: rtl;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  height: 100%;
+  flex-grow: 1;
+  border: none;
+  border-right: 5px solid transparent;
+
+  font-size: calc(0.9 * var(--default-font-size));
+  resize: none;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+.tag {
+  background-color: rgb(14, 186, 197);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  color: var(--white);
+  width: 5vw;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

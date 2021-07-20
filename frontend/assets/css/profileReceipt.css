@@ -24,6 +24,25 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
 }
 
+.categoryContainer{
+  width: 60%;
+  margin-top: 45px;
+}
+
+.CategoryBtn{
+  width: 50%;
+  height: 100%;
+  border: none;
+  /* color: rgb(238, 238, 238); */
+  background-color: white;
+  /* font-weight: 600; */
+}
+.CategoryBtn:hover{
+  color: rgb(14, 186, 197);
+}
+
+
+
 .personalFont {
   font-family: sans-serif;
 }
@@ -35,6 +54,9 @@
 
 .styled-table tbody tr {
   border-bottom: 1px solid var(--default-grey-background);
+}
+.styled-table tr{
+  line-height: 50px;
 }
 
 .styled-table tbody {

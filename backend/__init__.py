@@ -8,7 +8,7 @@ def create_app(config_object='backend.settings'):
     app.config.from_object(config_object)
 
     mongo.init_app(app)
-
+    print("Database Connection Established")
     app.register_blueprint(main)
 
     return app

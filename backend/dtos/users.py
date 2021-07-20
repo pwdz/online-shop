@@ -8,3 +8,8 @@ class RegisterInput(Schema):
     name = fields.Str(required=False)
     lastname = fields.Str(required=False)
     address = fields.Str(required=False)
+
+
+class LoginInput(Schema):
+    email = fields.Str(required=True)
+    password = fields.Str(required=True)

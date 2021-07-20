@@ -41,14 +41,21 @@
                 </div>
                 
             </div>
-            <div class="searchContainer">
+            <div class="searchContainer" id="imageslider">
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                
                 <p id="search-text">
                     در محصولات سایت جستجو کنید...
                 </p> 
                 <input type="text" name="search" id="search-input" placeholder="نام محصول خود را وارد کنید..."></input>
                 <button type="button" id="search-btn" class="yellowBtn">جستجو کنید</button> 
                 <img src="assets/images/clock.png" id="clock-img">
+                
             </div>
+
             <div class="sortContainer"> 
                 <div class="left" id="left">
                 </div>
@@ -157,7 +164,9 @@
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
            
         </section>
+
         <!-- Adding sthe script to html file -->
-        <!-- <script src="resources/script/index.js"></script> -->
+        <!-- <script src="resources/script/index.js"></> -->
+        <script src="assets/script/slider.js"></script>
     </body>
 </html>

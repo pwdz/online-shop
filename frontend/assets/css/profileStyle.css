@@ -113,20 +113,23 @@
   color: rgb(54, 54, 54);
 }
 
-#profileTab {
+#middleTab {
+  color: rgb(159, 163, 167);
+}
+#rightTab {
   background-color: rgb(238, 238, 238);
   color: rgb(54, 54, 54);
   border-bottom-right-radius: 30px;
   border-top-right-radius: 30px;
 }
 
-#receiptsTab {
+#leftTab {
   border-bottom-left-radius: 30px;
   border-top-left-radius: 30px;
   color: rgb(159, 163, 167);
 }
 
-#receiptsTab:focus {
+#leftTab:focus {
   background-color: rgb(238, 238, 238);
   color: black;
 }

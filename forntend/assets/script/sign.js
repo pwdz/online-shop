@@ -104,3 +104,8 @@ function checkFinalEditValidation() {
 
     return addrValid & nameValid & lastnameValid & passwordValid;
 }
+
+function getLoginInput() {
+    console.log("hi2");
+    return { email: email.value, password: fixNumbers(password.value) }
+}

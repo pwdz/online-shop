@@ -3,11 +3,32 @@
   width: 100%;
 
   background-color: rgb(247, 247, 247);
+  /* background-color: red; */
+  
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+#tab0{
+  height: 100%;
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
 
+  /* display: none; */
+}
+#tab1{
+  height: 100%;
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+
+  display: none;
+}
 .receiptSearchContainer {
   /* height: 50%; */
   width: 50%;
@@ -113,22 +134,20 @@
   color: rgb(54, 54, 54);
 }
 
-#profileTab {
+.middleTab {
+  color: rgb(159, 163, 167);
+}
+.rightTab {
   background-color: rgb(238, 238, 238);
   color: rgb(54, 54, 54);
   border-bottom-right-radius: 30px;
   border-top-right-radius: 30px;
 }
 
-#receiptsTab {
+.leftTab {
   border-bottom-left-radius: 30px;
   border-top-left-radius: 30px;
   color: rgb(159, 163, 167);
-}
-
-#receiptsTab:focus {
-  background-color: rgb(238, 238, 238);
-  color: black;
 }
 
 .inputFieldsContainer {

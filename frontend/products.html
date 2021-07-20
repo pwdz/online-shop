@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Store</title>
-        
+
         <link
             href="http://www.fontonline.ir/css/BYekan.css"
             rel="stylesheet"
@@ -14,13 +14,15 @@
 
         <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/profileStyle.css">
+        <link rel="stylesheet" href="assets/css/profileReceipt.css">
     </head>
 
+    
     <body>
         <section class="container" id="container">
             <div class="menu"> 
                 <div class="left" id="left">
-                    <!-- <button type="button" class="signin" id = "signin">ورود/ثبت نام</button> -->
                     <button class="dropbtn"> 
                         <div class="arrow"></div>
                         Dropdown
@@ -41,26 +43,22 @@
                 </div>
                 
             </div>
-            <div class="searchContainer">
-                <p id="search-text">
-                    در محصولات سایت جستجو کنید...
-                </p> 
-                <input type="text" name="search" id="search-input" placeholder="نام محصول خود را وارد کنید..."></input>
-                <button type="button" id="search-btn" class="yellowBtn">جستجو کنید</button> 
-                <img src="assets/images/clock.png" id="clock-img">
-            </div>
-            <div class="sortContainer"> 
-                <div class="left" id="left">
+            <div class="profileContainer">
+                <div class="topDiv mainTmargin">
+                    <p class="bigText"><span id="#username">ادمین<span> عزیز، خوش آمدید</p>
+                </div> 
+                <div class="tabContainer">
+                    <button type="button" class="tabBtn" id="leftTab">رسید ها</button> 
+                    <button type="button" class="tabBtn" id="middleTab">لیست دسته ها</button> 
+                    <button type="button" class="tabBtn" id="rightTab">لیست کالا</button> 
                 </div>
-                <div class="sortRight" id="sortRight">
-                    <button type="button" class="sortRightButton" id = "support">قیمت</button>
-                    <button type="button" class="sortRightButton" id = "page">بیشترین فروش</button>
-                    <div class="logo" id="logo" style="color: black; font-size: 16px; float: right;">:مرتب سازی بر اساس</div>   
+                <div class="createProduct">
+                    <button type="button" class="createProductBtn">لیست کالا</button> 
                 </div>
-            </div>
-            <div class="productContainer">
-                <div class="pcleft" id="pcleft">
+ 
+                <div class="productCon">
                     <div class="product">
+                        <div class="productAmount">2</div>
                         <img src="assets/images/minion.png" class="productImage">
                         <div class="productNameCat">
                             <h3 class="productName">
@@ -72,7 +70,7 @@
                         </div>
                         <hr class="solid">
                         <div class="productPriceBuy">
-                            <button type="button" id="buy-btn">خرید محصول</button>
+                            <button type="button" id="buy-btn">ویرایش محصول</button>
                             <p class="price">
                                 <span class="priceNumber">۱۰.۰۰۰</span> تومان
                             </p> 
@@ -80,6 +78,7 @@
                     </div>
 
                     <div class="product">
+                        <div class="productAmount">2</div>
                         <img src="assets/images/minion.png" class="productImage">
                         <div class="productNameCat">
                             <h3 class="productName">
@@ -91,7 +90,7 @@
                         </div>
                         <hr class="solid">
                         <div class="productPriceBuy">
-                            <button type="button" id="buy-btn">خرید محصول</button>
+                            <button type="button" id="buy-btn">ویرایش محصول</button>
                             <p class="price">
                                 <span class="priceNumber">۱۰.۰۰۰</span> تومان
                             </p> 
@@ -99,6 +98,7 @@
                     </div>
 
                     <div class="product">
+                        <div class="productAmount">2</div>
                         <img src="assets/images/minion.png" class="productImage">
                         <div class="productNameCat">
                             <h3 class="productName">
@@ -110,7 +110,7 @@
                         </div>
                         <hr class="solid">
                         <div class="productPriceBuy">
-                            <button type="button" id="buy-btn">خرید محصول</button>
+                            <button type="button" id="buy-btn">ویرایش محصول</button>
                             <p class="price">
                                 <span class="priceNumber">۱۰.۰۰۰</span> تومان
                             </p> 
@@ -118,46 +118,21 @@
                     </div>
 
 
+
                 </div>
-                <div class="pcRight" id="pcRight">
-                    <div class="category" id="category">
-                        <div class="header" id="header">دسته بندی</div>   
-                        <form class="catForm" style="direction: rtl; background-color: white; margin-top: 0.125%; padding: 5% 0% 5% 3%;">
-                            <p>
-                                <label><input type="radio" />دسته بندی یک</label>
-                            </p>
-                            <p style="margin-top: 2%;">
-                                <label><input type="radio" />دسته بندی یک</label>
-                            </p>
-                            <p style="margin-top: 2%; margin-bottom: 2%;">
-                                <label><input type="radio" />دسته بندی یک</label>
-                            </p>
-                        </form>
-                    </div>
-                    
-                    <div class="priceRange" id="priceRange">
-                            <div class="header" id="header"> تنظیم قیمت کالا</div> 
-                            <form>
-                            <div class="slidecontainer">
-                                <input type="range" min="1" max="100" value="20" class="slider" id="lowe">
-                                <input type="range" min="1" max="100" value="80" class="slider" id="higher">
-                                <!-- <input id="minAmount" type="number" value="20" min="1" max="100" oninput="minRange.value=minAmount.value" />
-                                <input id="maxAmount" type="number" value="80" min="1" max="100" oninput="maxRange.value=maxAmount.value" style="direction: rtl;" /> -->
-                              </div>
-                            </form>
-                    </div>
-                </div>
-                <!-- <form>
-                    <div>
-                      <input id="rangeInput" type="range" min="0" max="200"  />
-                      <input id="amount" type="number" value="100" min="0" max="200" oninput="rangeInput.value=amount.value" />
-                    </div>
-                  </form> -->
             </div>
+            
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
            
         </section>
         <!-- Adding sthe script to html file -->
         <!-- <script src="resources/script/index.js"></script> -->
-    </body>
-</html>
+    </body>    </html>
+
+
+
+
+
+
+
+    

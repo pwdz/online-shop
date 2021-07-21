@@ -1,8 +1,8 @@
 from flask import Blueprint
 from flask.helpers import flash, make_response
 from flask import Flask, render_template, url_for, request, session, redirect, jsonify
-from backend.dtos.users import RegisterInput, LoginInput
-from backend.dtos.categories import AddInput
+from backend.dtos.users import RegisterInput, LoginInput, IncreaseBalance, EditInput
+from backend.dtos.categories import AddInput, RemoveInput
 from backend.dtos.receipts import ChangeInput
 import backend.services.users as users
 import backend.services.admins as admins
@@ -15,8 +15,11 @@ from functools import wraps
 
 main = Blueprint('main', __name__)
 register_schema = RegisterInput()
+increase_balance_schema = IncreaseBalance()
+user_edit_schema = EditInput()
 login_schema = LoginInput()
 category_input_schema = AddInput()
+category_remove_schema = RemoveInput()
 receipt_input_schema = ChangeInput()
 product_input_schema = AddProductInput()
 productedit_input_schema = EditProductInput()
@@ -104,6 +107,9 @@ def login():
 @main.route('/users/edit', methods=['PUT'])
 @login_required
 def edit():
+    errors = user_edit_schema.validate(request.form)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
     try:
         res = users.edit(request.headers["Authorization"].replace('Bearer ', ''), request.form.get('password'),
                          request.form.get('name', None),  request.form.get('lastname', None), request.form.get('address', None))
@@ -116,6 +122,9 @@ def edit():
 @main.route('/users/balance', methods=['PUT'])
 @login_required
 def increase_balance():
+    errors = increase_balance_schema.validate(request.form)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
     try:
         res = users.increase_balance(request.headers["Authorization"].replace(
             'Bearer ', ''), request.form.get('balance'))
@@ -182,7 +191,7 @@ def edit_category():
 @main.route('/admins/categories', methods=['DELETE'])
 @admin_login_required
 def remove_category():
-    errors = category_input_schema.validate(request.form)
+    errors = category_remove_schema.validate(request.form)
     if errors:
         return jsonify({"success": False, "message": errors}), 400
     try:

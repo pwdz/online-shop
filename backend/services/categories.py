@@ -44,12 +44,14 @@ def get_list():
 
 def remove(name):
     categories = mongo.db.categories
+    products = mongo.db.products
     record = categories.find_one({'name': name})
     if record is None:
         raise Exception('Category is not found')
     if record['default'] is True:
         raise Exception("Default category can't be removed")
 
+    product_records = products.find({'category': record['name']})
     categories.remove(record)
     record['_id'] = str(record['_id'])
 

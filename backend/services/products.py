@@ -11,7 +11,7 @@ def addNew(name, price, count, soldCount, category = None, img = None):
     if not category:
         categories = mongo.db.categories
         category = categories.find_one({'default': True})['name']
-    newProduct = {'name': name, 'category': category, 'price': price, 'remainingCount': count, 'soldCount': soldCount, 'image': img}
+    newProduct = {'name': name, 'category': category, 'price': int(price), 'remainingCount': int(count), 'soldCount': int(soldCount), 'image': img}
     products.insert(newProduct)
 
     return True
@@ -34,15 +34,24 @@ def edit(currName, newName = None, newCategory = None, newCount = None, newPrice
         product['category'] = newCategory
 
     if newPrice:
-        product['price'] = newPrice
+        product['price'] = int(newPrice)
     if newImg:
         product['img'] = newImg
     if newCount:
-        product["remainingCount"] = newCount
+        product["remainingCount"] = int(newCount)
     
     products.save(product)
         
     return True
     
+def get_list():
+    products = mongo.db.products
+    records = products.find()
+    output = []
+    for record in records:
+        record['_id'] = str(record['_id'])
+        output.append(record)
+    return output
+
 
  

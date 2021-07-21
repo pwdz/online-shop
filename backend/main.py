@@ -232,6 +232,17 @@ def add_product():
         print(e)
         return jsonify({"success": False, "message": e.args}), 400
 
+@main.route('/products/list', methods=['GET'])
+def get_products_list():
+    try:
+        res = products.get_list()
+        return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+
 
 @main.route('/users/receipts', methods=['GET'])
 @admin_login_required

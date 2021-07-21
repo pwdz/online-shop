@@ -16,5 +16,5 @@ def create_app(config_object='backend.settings'):
     secret = secrets.token_urlsafe(32)
     app.secret_key = secret
     admins.add('defualt@email.com', 'test12345')
-    categories.addNew('دسته بندی نشده', True)
+    categories.add_new('دسته بندی نشده', True)
     return app

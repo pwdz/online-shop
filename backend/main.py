@@ -2,15 +2,21 @@ from flask import Blueprint
 from flask.helpers import flash, make_response
 from flask import Flask, render_template, url_for, request, session, redirect, jsonify
 from backend.dtos.users import RegisterInput, LoginInput
+from backend.dtos.categories import AddInput
+from backend.dtos.products import AddProductInput, EditProductInput
 import backend.services.users as users
 import backend.services.admins as admins
 import backend.services.products as products
+import backend.services.categories as categories
 import backend.utils.login as loginService
 from functools import wraps
 
 main = Blueprint('main', __name__)
 register_schema = RegisterInput()
 login_schema = LoginInput()
+category_input_schema = AddInput()
+product_input_schema = AddProductInput()
+productedit_input_schema = EditProductInput()
 
 
 def login_required(f):
@@ -92,23 +98,128 @@ def login():
     return res
 
 
-@main.route('/edit', methods=['PUT'])
+@main.route('/users/edit', methods=['PUT'])
 @login_required
 def edit():
     try:
         res = users.edit(request.headers["Authorization"].replace('Bearer ', ''), request.form.get('password'),
                          request.form.get('name', None),  request.form.get('lastname', None), request.form.get('address', None))
-        print("hey you")
         return jsonify({"success": True, "data": res})
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400
 
-@main.route('/addprod', methods=['POST'])
-def addProduct():
-    print("shir")
-    print(request)
-    print(request.data)
-    return ":)"
-    # try:
-        # res = products.edit(request)
+@main.route('/users/balance', methods=['PUT'])
+@login_required
+def increase_balance():
+    try:
+        res = users.increase_balance(request.headers["Authorization"].replace(
+            'Bearer ', ''), request.form.get('balance')),
+        return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/categories/list', methods=['GET'])
+def get_category_list():
+    try:
+        res = categories.get_list()
+        return jsonify({"success": True, "data": res})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/admins/categories', methods=['POST'])
+@admin_login_required
+def add_category():
+    errors = category_input_schema.validate(request.form)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = categories.add_new(request.form.get('name'))
+        return jsonify({"success": True, "data": res})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/admins/categories', methods=['PUT'])
+@admin_login_required
+def edit_category():
+    errors = category_input_schema.validate(request.form)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = categories.edit(request.form.get('name'))
+        return jsonify({"success": True, "data": res})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/admins/categories', methods=['DELETE'])
+@admin_login_required
+def remove_category():
+    errors = category_input_schema.validate(request.form)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = categories.remove(request.form.get('name'))
+        return jsonify({"success": True, "data": res})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+@main.route('/admins/products', methods=['POST'])
+@admin_login_required
+def add_product():
+    data = request.form
+    errors = product_input_schema.validate(data)
+    if errors:
+        res = make_response(
+            jsonify({"success": False, "message": errors}), 400)
+        res.headers.add("Access-Control-Allow-Origin", "*")
+        return res
+    try:
+        res = products.addNew(data.get('name'),
+                                data.get('category'),
+                                data.get('price'),
+                                data.get('count'),
+                                soldCount = 0
+                                # img = request.form.get('image')
+                            )
+        return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/admins/products', methods=['PUT'])
+@admin_login_required
+def edit_product():
+    data = request.form
+    errors = productedit_input_schema.validate(data)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = products.edit(data.get('name'),
+                            data.get('new_name'),
+                            data.get('new_category'),
+                            data.get('new_price'),
+                            data.get('new_count')
+                            )
+        return jsonify({"success": True, "data": res})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+
+

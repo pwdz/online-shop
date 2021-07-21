@@ -16,19 +16,19 @@ def add_new(name, default=False):
     return new_category
 
 
-def edit(name=None):
+def edit(cat_name, new_name=None):
     categories = mongo.db.categories
 
-    category = categories.find_one({'name': name})
+    category = categories.find_one({'name': cat_name})
 
     if category is None:
         raise Exception('Category is not found!')
 
-    if name:
-        category["name"] = name
+    if new_name:
+        category["name"] = new_name
 
     categories.save(category)
-    categories['_id'] = str(categories['_id'])
+    category['_id'] = str(category['_id'])
     return True
 
 

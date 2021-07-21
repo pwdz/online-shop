@@ -3,9 +3,11 @@ from flask.helpers import flash, make_response
 from flask import Flask, render_template, url_for, request, session, redirect, jsonify
 from backend.dtos.users import RegisterInput, LoginInput
 from backend.dtos.categories import AddInput
+from backend.dtos.receipts import ChangeInput
 import backend.services.users as users
 import backend.services.admins as admins
 import backend.services.categories as categories
+import backend.services.receipts as receipts
 import backend.utils.login as loginService
 from functools import wraps
 
@@ -13,6 +15,7 @@ main = Blueprint('main', __name__)
 register_schema = RegisterInput()
 login_schema = LoginInput()
 category_input_schema = AddInput()
+receipt_input_schema = ChangeInput()
 
 
 def login_required(f):
@@ -111,7 +114,19 @@ def edit():
 def increase_balance():
     try:
         res = users.increase_balance(request.headers["Authorization"].replace(
-            'Bearer ', ''), request.form.get('balance')),
+            'Bearer ', ''), request.form.get('balance'))
+        return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/users/receipts', methods=['GET'])
+@login_required
+def get_my_receipts():
+    try:
+        res = receipts.get_list(
+            request.headers["Authorization"].replace('Bearer ', ''))
         return jsonify({"success": True, "data": res})
     except Exception as e:
         print(e)
@@ -151,7 +166,8 @@ def edit_category():
     if errors:
         return jsonify({"success": False, "message": errors}), 400
     try:
-        res = categories.edit(request.form.get('name'))
+        res = categories.edit(request.form.get('catName'),
+                              request.form.get('newName'))
         return jsonify({"success": True, "data": res})
 
     except Exception as e:
@@ -169,6 +185,33 @@ def remove_category():
         res = categories.remove(request.form.get('name'))
         return jsonify({"success": True, "data": res})
 
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/admins/receipts', methods=['PUT'])
+@admin_login_required
+def change_receipt_sate():
+    errors = receipt_input_schema.validate(request.form)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = receipts.change_state(
+            request.form.get('id'), request.form.get('state'))
+        return jsonify({"success": True, "data": res})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/users/receipts', methods=['GET'])
+@admin_login_required
+def get_receipts_list():
+    try:
+        res = receipts.get_list()
+        return jsonify({"success": True, "data": res})
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400

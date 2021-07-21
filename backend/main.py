@@ -6,9 +6,11 @@ from backend.dtos.categories import AddInput
 from backend.dtos.receipts import ChangeInput
 import backend.services.users as users
 import backend.services.admins as admins
+import backend.services.products as products
 import backend.services.categories as categories
 import backend.services.receipts as receipts
 import backend.utils.login as loginService
+from backend.dtos.products import AddProductInput, EditProductInput
 from functools import wraps
 
 main = Blueprint('main', __name__)
@@ -16,6 +18,8 @@ register_schema = RegisterInput()
 login_schema = LoginInput()
 category_input_schema = AddInput()
 receipt_input_schema = ChangeInput()
+product_input_schema = AddProductInput()
+productedit_input_schema = EditProductInput()
 
 
 def login_required(f):
@@ -200,7 +204,30 @@ def change_receipt_sate():
         res = receipts.change_state(
             request.form.get('id'), request.form.get('state'))
         return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
 
+
+@main.route('/admins/products', methods=['POST'])
+@admin_login_required
+def add_product():
+    data = request.form
+    errors = product_input_schema.validate(data)
+    if errors:
+        res = make_response(
+            jsonify({"success": False, "message": errors}), 400)
+        res.headers.add("Access-Control-Allow-Origin", "*")
+        return res
+    try:
+        res = products.addNew(data.get('name'),
+                              data.get('category'),
+                              data.get('price'),
+                              data.get('count'),
+                              soldCount=0
+                              # img = request.form.get('image')
+                              )
+        return jsonify({"success": True, "data": res})
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400
@@ -212,6 +239,27 @@ def get_receipts_list():
     try:
         res = receipts.get_list()
         return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/admins/products', methods=['PUT'])
+@admin_login_required
+def edit_product():
+    data = request.form
+    errors = productedit_input_schema.validate(data)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = products.edit(data.get('name'),
+                            data.get('new_name'),
+                            data.get('new_category'),
+                            data.get('new_price'),
+                            data.get('new_count')
+                            )
+        return jsonify({"success": True, "data": res})
+
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400

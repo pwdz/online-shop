@@ -31,6 +31,5 @@ function switchTab(currTab, newTab, pressedBtns, releasedBtns){
 
         releasedBtns[i].style.backgroundColor = "rgb(247, 247, 247)";
         releasedBtns[i].style.color = "rgb(159, 163, 167)";
-
     }
 }

@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Store</title>
-
+        
         <link
             href="http://www.fontonline.ir/css/BYekan.css"
             rel="stylesheet"
@@ -18,9 +18,9 @@
         <link rel="stylesheet" href="assets/css/profileReceipt.css">
     </head>
 
-    
     <body>
         <section class="container" id="container">
+
             <div class="menu"> 
                 <div class="left" id="left">
                     <button type="button" class="signin" id = "signin">ورود/ثبت نام</button>
@@ -48,74 +48,326 @@
                 <div class="topDiv mainTmargin">
                     <p class="bigText"><span id="#username">ادمین<span> عزیز، خوش آمدید</p>
                 </div> 
-                <div class="tabContainer">
-                    <button type="button" class="tabBtn" id="leftTab">رسید ها</button> 
-                    <button type="button" class="tabBtn" id="middleTab">لیست دسته ها</button> 
-                    <button type="button" class="tabBtn" id="rightTab">لیست کالا</button> 
+                <div class="tabContainer mainTmargin">
+                    <button type="button" class="tabBtn leftTab">رسید ها</button> 
+                    <button type="button" class="tabBtn middleTab">لیست دسته ها</button> 
+                    <button type="button" class="tabBtn rightTab">لیست کالا</button> 
                 </div>
-                <div class="receiptSearchContainer">
-                        <textarea  class="srchHolder" placeholder=" کد پیگیری موردنظر را جست و جو کنید..."></textarea>
-                        <button class="tag searchButton">جست و جو کد پیگیری</button>
-                    
-                </div>
-                <div class="tableContainer subTmargin">
-                    <table class="styled-table">
-                        <thead>
-                            <tr>
-                                <th>کد پیگیری</th>
-                                <th>کالا</th>
-                                <th>قیمت پرداخت شده</th>
-                                <th>آدرس ارسال شده</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="personalFont">SHOP102030</td>
-                                <td>موس گیمینگ ریز</td>
-                                <td>10/000تومان</td>
-                                <td>تهران امیرکبیر</td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="personalFont">SHOP102030</td>
-                                <td>موس گیمینگ ریز</td>
-                                <td>10/000تومان</td>
-                                <td>تهران امیرکبیر</td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="personalFont">SHOP102030</td>
-                                <td>موس گیمینگ ریز</td>
-                                <td>10/000تومان</td>
-                                <td>تهران امیرکبیر</td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="personalFont">SHOP102030</td>
-                                <td>موس گیمینگ ریز</td>
-                                <td>10/000تومان</td>
-                                <td>تهران امیرکبیر</td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="personalFont">SHOP102030</td>
-                                <td>موس گیمینگ ریز</td>
-                                <td>10/000تومان</td>
-                                <td>تهران امیرکبیر</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="tabRec"> 
+                    <div class="receiptSearchContainer">
+                            <textarea  class="srchHolder" placeholder=" کد پیگیری موردنظر را جست و جو کنید..."></textarea>
+                            <button class="tag searchButton">جست و جو کد پیگیری</button>
+                        
+                    </div>
+                    <div class="tableContainer subTmargin">
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th>کد پیگیری</th>
+                                    <th>کالا</th>
+                                    <th>قیمت پرداخت شده</th>
+                                    <th>آدرس ارسال شده</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="personalFont">SHOP102030</td>
+                                    <td>موس گیمینگ ریز</td>
+                                    <td>10/000تومان</td>
+                                    <td>تهران امیرکبیر</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="personalFont">SHOP102030</td>
+                                    <td>موس گیمینگ ریز</td>
+                                    <td>10/000تومان</td>
+                                    <td>تهران امیرکبیر</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="personalFont">SHOP102030</td>
+                                    <td>موس گیمینگ ریز</td>
+                                    <td>10/000تومان</td>
+                                    <td>تهران امیرکبیر</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="personalFont">SHOP102030</td>
+                                    <td>موس گیمینگ ریز</td>
+                                    <td>10/000تومان</td>
+                                    <td>تهران امیرکبیر</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="personalFont">SHOP102030</td>
+                                    <td>موس گیمینگ ریز</td>
+                                    <td>10/000تومان</td>
+                                    <td>تهران امیرکبیر</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
+                    </div>
+                </div>
+                <div class="tabCat"> 
+                    <div class="categoryContainer">
+                        <table class="styled-table">
+                            <colgroup>
+                                <col style="width: 60%">
+                                <col style="width: 40%">
+                            <!-- repeat as many cols as the number of headers -->
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>نام دسته‌بندی</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+ 
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+    
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+    
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+    
+                                <tr>
+                                    <td>دسته‌بندی</td>
+                                    <td>            
+                                        <div style="display:flex; flex-direction:row;background-color: red;">
+                                            <button type="button" class="CategoryBtn">ویرایش دسته‌بندی</button> 
+                                            <button type="button" class="CategoryBtn">Xحذف دسته‌بندی</button> 
+                                        </div>
+                                    </td>
+                                </tr>
+    
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="tabProd">
+                    <div class="createProduct">
+                        <button type="button" class="createProductBtn">ایجاد محصول جدید</button> 
+                    </div>
+    
+                    <div class="productCon">
+                        <div class="product">
+                            <div class="productAmount">2</div>
+                            <img src="assets/images/minion.png" class="productImage">
+                            <div class="productNameCat">
+                                <h3 class="productName">
+                                    موس گیمینگ ریزر
+                                </h3>
+                                <p class="productCat">
+                                    دسته‌بندی یک
+                                </p>
+                            </div>
+                            <hr class="solid">
+                            <div class="productPriceBuy">
+                                <button type="button" id="buy-btn">ویرایش محصول</button>
+                                <p class="price">
+                                    <span class="priceNumber">۱۰.۰۰۰</span> تومان
+                                </p> 
+                            </div>
+                        </div>
+
+                        <div class="product">
+                            <div class="productAmount">2</div>
+                            <img src="assets/images/minion.png" class="productImage">
+                            <div class="productNameCat">
+                                <h3 class="productName">
+                                    موس گیمینگ ریزر
+                                </h3>
+                                <p class="productCat">
+                                    دسته‌بندی یک
+                                </p>
+                            </div>
+                            <hr class="solid">
+                            <div class="productPriceBuy">
+                                <button type="button" id="buy-btn">ویرایش محصول</button>
+                                <p class="price">
+                                    <span class="priceNumber">۱۰.۰۰۰</span> تومان
+                                </p> 
+                            </div>
+                        </div>
+
+                        <div class="product">
+                            <div class="productAmount">2</div>
+                            <img src="assets/images/minion.png" class="productImage">
+                            <div class="productNameCat">
+                                <h3 class="productName">
+                                    موس گیمینگ ریزر
+                                </h3>
+                                <p class="productCat">
+                                    دسته‌بندی یک
+                                </p>
+                            </div>
+                            <hr class="solid">
+                            <div class="productPriceBuy">
+                                <button type="button" id="buy-btn">ویرایش محصول</button>
+                                <p class="price">
+                                    <span class="priceNumber">۱۰.۰۰۰</span> تومان
+                                </p> 
+                            </div>
+                        </div>
+
+
+
+                    </div>
                 </div>
             </div>
-            
+ 
+            <div class="empty"></div>
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
-           
         </section>
         <!-- Adding sthe script to html file -->
         <!-- <script src="resources/script/index.js"></script> -->
         <script src="assets/script/mainpage.js"></script>
-    </body>    </html>
+        <script src="assets/script/adminPage.js"></script>
+    </body>   
+</html>
 
 
 

@@ -4,6 +4,7 @@ from flask import Flask, render_template, url_for, request, session, redirect, j
 from backend.dtos.users import RegisterInput, LoginInput
 import backend.services.users as users
 import backend.services.admins as admins
+import backend.services.products as products
 import backend.utils.login as loginService
 from functools import wraps
 
@@ -102,3 +103,12 @@ def edit():
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400
+
+@main.route('/addprod', methods=['POST'])
+def addProduct():
+    print("shir")
+    print(request)
+    print(request.data)
+    return ":)"
+    # try:
+        # res = products.edit(request)

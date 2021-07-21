@@ -2,14 +2,17 @@ from flask import Blueprint
 from flask.helpers import flash, make_response
 from flask import Flask, render_template, url_for, request, session, redirect, jsonify
 from backend.dtos.users import RegisterInput, LoginInput
+from backend.dtos.categories import AddInput
 import backend.services.users as users
 import backend.services.admins as admins
+import backend.services.categories as categories
 import backend.utils.login as loginService
 from functools import wraps
 
 main = Blueprint('main', __name__)
 register_schema = RegisterInput()
 login_schema = LoginInput()
+category_input_schema = AddInput()
 
 
 def login_required(f):
@@ -91,14 +94,81 @@ def login():
     return res
 
 
-@main.route('/edit', methods=['PUT'])
+@main.route('/users/edit', methods=['PUT'])
 @login_required
 def edit():
     try:
         res = users.edit(request.headers["Authorization"].replace('Bearer ', ''), request.form.get('password'),
                          request.form.get('name', None),  request.form.get('lastname', None), request.form.get('address', None))
-        print("hey you")
         return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/users/balance', methods=['PUT'])
+@login_required
+def increase_balance():
+    try:
+        res = users.increase_balance(request.headers["Authorization"].replace(
+            'Bearer ', ''), request.form.get('balance')),
+        return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/categories/list', methods=['GET'])
+def get_category_list():
+    try:
+        res = categories.get_list()
+        return jsonify({"success": True, "data": res})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/admins/categories', methods=['POST'])
+@admin_login_required
+def add_category():
+    errors = category_input_schema.validate(request.form)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = categories.add_new(request.form.get('name'))
+        return jsonify({"success": True, "data": res})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/admins/categories', methods=['PUT'])
+@admin_login_required
+def edit_category():
+    errors = category_input_schema.validate(request.form)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = categories.edit(request.form.get('name'))
+        return jsonify({"success": True, "data": res})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/admins/categories', methods=['DELETE'])
+@admin_login_required
+def remove_category():
+    errors = category_input_schema.validate(request.form)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = categories.remove(request.form.get('name'))
+        return jsonify({"success": True, "data": res})
+
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400

@@ -30,13 +30,30 @@ def register(email, password, name=None, lastname=None, address=None):
     return new_user
 
 
-def increase_balance(me, balance):
+def increase_balance(me, balance=0):
     users = mongo.db.users
     user = users.find_one({'token': me})
-    user["balance"] = balance
+    user["balance"] += int(balance)
     users.save(user)
-
+    user['_id'] = str(user['_id'])
     return user
+
+
+def decrease_balance(me, balance=0):
+    users = mongo.db.users
+    user = users.find_one({'token': me})
+    user["balance"] -= int(balance)
+    users.save(user)
+    user['_id'] = str(user['_id'])
+    return user
+
+# def get_user(user_id):
+#     users = mongo.db.users
+#     user = users.find_one({'_id': ObjectId(user_id)})
+#     if user is None:
+#         raise Exception('User is not found')
+
+#     return {'name': user['name', 'lastname': user['lastname'], 'address': user['address']]}
 
 
 def edit(me, password=None, name=None, lastname=None, address=None):

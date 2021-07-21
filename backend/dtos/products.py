@@ -19,4 +19,6 @@ class GetProductInput(Schema):
     price_descending = fields.Bool(required=False)
     price_ascending = fields.Bool(required=False)
     date = fields.Bool(requied=False)   
+    price_range_min = fields.Int(required=False)
+    price_range_max = fields.Int(required=False)
     

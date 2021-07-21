@@ -95,8 +95,8 @@ async function clickSignInBtn() {
         // if (inputCheck.includes(true)) {
         try {
             const loginData = getLoginInput()
-            const resData = fetchLogin(loginData)
-
+            const resData = await fetchLogin(loginData)
+            console.log(resData);
             if (resData.success) {
                 text = "ورود موفقیت آمیز است";
                 textColor = "green";

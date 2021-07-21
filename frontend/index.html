@@ -15,22 +15,22 @@
         <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/style.css">
 
-        <script src="assets/script/pagination.js"></script>
     </head>
 
     <body>
         <section class="container" id="container">
             <div class="menu"> 
                 <div class="left" id="left">
-                    <!-- <button type="button" class="signin" id = "signin">ورود/ثبت نام</button> -->
+                    <button type="button" class="signin" id = "signin">ورود/ثبت نام</button>
                     <button class="dropbtn" id="dropbtn"> 
                         <div class="arrow"></div>
-                        <p id="dropBtnText">Dropdown</p>
+                        <div class="dropBtnText" id="dropBtnText">Dropdown</div>
                     </button>
                     
+                    <a href="userProfile.html">uhuhuhuhu</a>
                     <div class="dropdown-content">
-                        <a href="#">پروفایل</a>
-                        <a href="#">خروج از حساب</a>
+                        <button class="profileBtn" id="profileBtn" onfocus="profileBtnClick();">پروفایل</a>
+                        <button class="profileBtn" id="logoutBtn" >خروج از حساب</a>
                     </div>
                 </div>
                
@@ -87,65 +87,9 @@
                             </p> 
                         </div>
                     </div>
+                    <div class="pagination">
 
-                    <div class="product">
-                        <img src="assets/images/minion.png" class="productImage">
-                        <div class="productNameCat">
-                            <h3 class="productName">
-                                موس گیمینگ ریزر
-                            </h3>
-                            <p class="productCat">
-                                دسته‌بندی یک
-                            </p>
-                        </div>
-                        <hr class="solid">
-                        <div class="productPriceBuy">
-                            <button type="button" id="buy-btn">خرید محصول</button>
-                            <p class="price">
-                                <span class="priceNumber">۱۰.۰۰۰</span> تومان
-                            </p> 
-                        </div>
                     </div>
-
-                    <div class="product">
-                        <img src="assets/images/minion.png" class="productImage">
-                        <div class="productNameCat">
-                            <h3 class="productName">
-                                موس گیمینگ ریزر
-                            </h3>
-                            <p class="productCat">
-                                دسته‌بندی یک
-                            </p>
-                        </div>
-                        <hr class="solid">
-                        <div class="productPriceBuy">
-                            <button type="button" id="buy-btn">خرید محصول</button>
-                            <p class="price">
-                                <span class="priceNumber">۱۰.۰۰۰</span> تومان
-                            </p> 
-                        </div>
-                    </div>
-
-                    <div class="product">
-                        <img src="assets/images/minion.png" class="productImage">
-                        <div class="productNameCat">
-                            <h3 class="productName">
-                                موس گیمینگ ریزر
-                            </h3>
-                            <p class="productCat">
-                                دسته‌بندی یک
-                            </p>
-                        </div>
-                        <hr class="solid">
-                        <div class="productPriceBuy">
-                            <button type="button" id="buy-btn">خرید محصول</button>
-                            <p class="price">
-                                <span class="priceNumber">۱۰.۰۰۰</span> تومان
-                            </p> 
-                        </div>
-                    </div>
-
-
                 </div>
                 <div class="pcRight" id="pcRight">
                     <div class="category" id="category">
@@ -174,6 +118,8 @@
                               </div>
                             </form>
                     </div>
+
+
                 </div>
                 <!-- <form>
                     <div>
@@ -183,7 +129,8 @@
                   </form> -->
             </div>
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
-           
+
+            <script src="assets/script/pagination.js"></script>
         </section>
 
         <!-- Adding sthe script to html file -->

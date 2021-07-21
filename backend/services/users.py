@@ -85,7 +85,7 @@ def login(login_user, email, password):
         login_user['token'] = token.decode(encoding="utf-8")
         users.save(login_user)
         name = 'کاربر'
-        if name in login_user:
+        if 'name' in login_user:
             name = login_user['name']
         return {'email': email, 'name': name, 'token': login_user['token']}
     else:

@@ -19,18 +19,22 @@ def add_new(name, default=False):
 
 def edit(cat_name, new_name=None):
     categories = mongo.db.categories
-
+    products = mongo.db.products
     category = categories.find_one({'name': cat_name})
 
     if category is None:
         raise Exception('Category is not found!')
-
     if new_name:
         category["name"] = new_name
+        product_records = products.find({'category': cat_name})
+        for product_record in product_records:
+            productService.update_category(
+                product_record['name'], new_name)
 
     categories.save(category)
     category['_id'] = str(category['_id'])
-    return True
+
+    return category
 
 
 def get_list():

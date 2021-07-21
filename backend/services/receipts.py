@@ -1,6 +1,10 @@
 from backend.extensions import mongo
 from bson.objectid import ObjectId
 from datetime import datetime
+from random import seed
+from random import randint
+# seed random number generator
+seed(1)
 
 # print(mongo)
 
@@ -18,8 +22,10 @@ def add(product_name, number_of_products, me, price, state='processing'):
         lastname = user['lastname']
     if user['address']:
         address = user['address']
+
+    tracking = str(user['_id'])[0:4] + randint(10, 99)
     new_receipt = {'product': product_name, 'number': number_of_products,
-                   'user': ObjectId(user['_id']), 'name': name, 'lastname': lastname, 'address': address, 'price': price, 'date': datetime.now(), 'state': state}
+                   'user': ObjectId(user['_id']), 'name': name, 'lastname': lastname, 'tracking': tracking, 'address': address, 'price': price, 'date': datetime.now(), 'state': state}
 
     receipts.insert(new_receipt)
     new_receipt['_id'] = str(new_receipt['_id'])
@@ -27,7 +33,7 @@ def add(product_name, number_of_products, me, price, state='processing'):
     return new_receipt
 
 
-def get_list(me=None):
+def get_list(me=None, tracking=None):
     receipts = mongo.db.receipts
     records = []
     output = []
@@ -41,7 +47,10 @@ def get_list(me=None):
         output.append({'_id': record['_id'], 'product': record['product'], 'number': record['number'],
                        'address': record['address'], 'price': record['price'], 'date': record['date'], 'state': record['state']})
     else:
-        records = receipts.find()
+        if tracking:
+            records = receipts.find({'tracking': tracking})
+        else:
+            records = receipts.find()
         for record in records:
             record['_id'] = str(record['_id'])
         output.append(record)

@@ -16,24 +16,29 @@ def addNew(name, price, count, soldCount=0, category=None, img=None):
         if not categoryService.exists(category):
             raise Exception('Category is not found')
 
-    newProduct = {'name': name, 'category': category, 'price': price,
-                  'remainingCount': count, 'soldCount': soldCount, 'image': img}
+    newProduct = {'name': name, 'category': category, 'price': int(
+        price), 'remainingCount': int(count), 'soldCount': int(soldCount), 'image': img}
+
     products.insert(newProduct)
 
     return True
 
 
-def update_category(product_name):
+def update_category(product_name, category_name=None):
     products = mongo.db.products
     categories = mongo.db.categories
-
-    default_category = categories.find_one({'default': True})
+    category = []
     product = products.find_one({'name': product_name})
 
     if product is None:
         raise Exception('Product is not found')
+    if category_name:
+        print("aloooooooooooo", category_name)
+        product['category'] = category_name
+    else:
+        category = categories.find_one({'default': True})
+        product['category'] = category['name']
 
-    product['category'] = default_category['name']
     products.save(product)
     product['_id'] = str(product['_id'])
 
@@ -56,12 +61,24 @@ def edit(currName, newName=None, newCategory=None, newCount=None, newPrice=None,
         product['category'] = newCategory
 
     if newPrice:
-        product['price'] = newPrice
+        product['price'] = int(newPrice)
     if newImg:
         product['img'] = newImg
     if newCount:
-        product["remainingCount"] = newCount
+        product["remainingCount"] = int(newCount)
 
     products.save(product)
+
+    return True
+
+
+def get_list():
+    products = mongo.db.products
+    records = products.find()
+    output = []
+    for record in records:
+        record['_id'] = str(record['_id'])
+        output.append(record)
+    return output
 
     return True

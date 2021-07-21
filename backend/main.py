@@ -182,6 +182,7 @@ def edit_category():
     try:
         res = categories.edit(request.form.get('catName'),
                               request.form.get('newName'))
+
         return jsonify({"success": True, "data": res})
 
     except Exception as e:
@@ -237,6 +238,16 @@ def add_product():
                               category=data.get('category'),
                               # img = request.form.get('image')
                               )
+        return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
+@main.route('/products/list', methods=['GET'])
+def get_products_list():
+    try:
+        res = products.get_list()
         return jsonify({"success": True, "data": res})
     except Exception as e:
         print(e)

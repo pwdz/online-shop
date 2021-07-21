@@ -39,12 +39,13 @@ def increase_balance(me, balance=0):
     return user
 
 
-def decrease_balance(me, balance=0):
+def decrease_balance(me, cost=0):
     users = mongo.db.users
     user = users.find_one({'token': me})
-    user["balance"] -= int(balance)
+    user["balance"] -= int(cost)
     users.save(user)
     user['_id'] = str(user['_id'])
+
     return user
 
 # def get_user(user_id):
@@ -101,6 +102,7 @@ def check_token(token):
 
     return valid
 
+
 def check_balance(me, cost):
     users = mongo.db.users
     user = users.find_one({'token': me})
@@ -108,4 +110,4 @@ def check_balance(me, cost):
     if user is None:
         raise Exception('User is not found!')
 
-    return user['balance'] >= cost
+    return int(user['balance']) >= int(cost)

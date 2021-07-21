@@ -4,6 +4,7 @@ from backend.extensions import mongo
 import time
 import backend.services.categories as categoryService
 
+
 def addNew(name, price, count, soldCount=0, category=None, img=None):
     products = mongo.db.products
     existingProd = products.find_one({'name': name})
@@ -71,14 +72,17 @@ def edit(currName, newName=None, newCategory=None, newCount=None, newPrice=None,
     products.save(product)
 
     return True
-def get_list(category = None, price_ascending = None, price_descending = None, date = None, price_range_min = None, price_range_max = None):
+
+
+def get_list(category=None, price_ascending=None, price_descending=None, date=None, price_range_min=None, price_range_max=None):
     products = mongo.db.products
-    
+
     filter = [("soldCount", pymongo.DESCENDING)]
     if category:
         records = products.find({'category': category})
     elif price_range_max and price_range_min:
-        records = products.find({'price': {'$gte': int(price_range_min), '$lte': int(price_range_max)}})
+        records = products.find(
+            {'price': {'$gte': int(price_range_min), '$lte': int(price_range_max)}})
     else:
         if price_ascending:
             filter = [("price", pymongo.ASCENDING)]
@@ -88,12 +92,13 @@ def get_list(category = None, price_ascending = None, price_descending = None, d
             filter = [("timestamp", pymongo.DESCENDING)]
 
         records = products.find().sort(filter)
-        
+
     output = []
     for record in records:
         record['_id'] = str(record['_id'])
         output.append(record)
     return output
+
 
 def check_storage(product_name, amount):
     products = mongo.db.products
@@ -101,8 +106,9 @@ def check_storage(product_name, amount):
 
     if not product:
         raise Exception("Product doesn't exists!")
-    
-    return product['remainingCount'] >= int(amount), product['price']
+
+    return (int(product['remainingCount']) >= int(amount)), product['price']
+
 
 def buy_product(product_name, amount):
     products = mongo.db.products
@@ -110,9 +116,9 @@ def buy_product(product_name, amount):
 
     if not product:
         raise Exception("Product doesn't exists!")
-    
-    product['remainingCount'] = product['remainingCount'] - int(amount)
-    product['soldCount'] = product['soldCount'] + int(amount)
-    products.save(product)    
+
+    product['remainingCount'] = int(product['remainingCount']) - int(amount)
+    product['soldCount'] = int(product['soldCount']) + int(amount)
+    products.save(product)
 
     return True

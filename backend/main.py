@@ -144,6 +144,7 @@ def get_my_receipts():
         res = receipts.get_list(
             request.headers["Authorization"].replace('Bearer ', ''))
         return jsonify({"success": True, "data": res})
+
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400
@@ -222,6 +223,20 @@ def change_receipt_sate():
         return jsonify({"success": False, "message": e.args}), 400
 
 
+@main.route('/admins/receipts', methods=['GET'])
+@admin_login_required
+def get_list():
+    # errors = receipt_input_schema.validate(request.form)
+    # if errors:
+    #     return jsonify({"success": False, "message": errors}), 400
+    try:
+        res = receipts.get_list(tracking=request.form.get('tracking'))
+        return jsonify({"success": True, "data": res})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+
 @main.route('/admins/products', methods=['POST'])
 @admin_login_required
 def add_product():
@@ -255,9 +270,10 @@ def get_products_list():
             jsonify({"success": False, "message": errors}), 400)
         res.headers.add("Access-Control-Allow-Origin", "*")
         return res
- 
+
     try:
-        res = products.get_list(data.get('category'), data.get('price_ascending'), data.get('price_descending'), data.get('date'), data.get('price_range_min'), data.get('price_range_max'))
+        res = products.get_list(data.get('category'), data.get('price_ascending'), data.get(
+            'price_descending'), data.get('date'), data.get('price_range_min'), data.get('price_range_max'))
         return jsonify({"success": True, "data": res})
     except Exception as e:
         print(e)
@@ -295,6 +311,7 @@ def edit_product():
         print(e)
         return jsonify({"success": False, "message": e.args}), 400
 
+
 @main.route('/users/buy', methods=['POST'])
 @login_required
 def buy_products():
@@ -303,10 +320,13 @@ def buy_products():
     if errors:
         return jsonify({"success": False, "message": errors}), 400
     try:
-        product_exists, product_price = products.check_storage(data.get('product_name'), data.get('count'))
+        print("hey")
+        product_exists, product_price = products.check_storage(
+            data.get('product_name'), data.get('count'))
 
         cost = product_price * int(data.get('count'))
-        has_enough_balance = users.check_balance(request.headers["Authorization"].replace('Bearer ', ''), cost)
+        has_enough_balance = users.check_balance(
+            request.headers["Authorization"].replace('Bearer ', ''), cost)
 
         if not product_exists:
             return jsonify({"success": False, "message": "storage doesn't gave enought of this product"})
@@ -315,15 +335,14 @@ def buy_products():
         else:
             products.buy_product(data.get('product_name'), data.get('count'))
 
-            users.decrease_balance(request.headers["Authorization"].replace('Bearer ', ''), cost)            
+            users.decrease_balance(
+                request.headers["Authorization"].replace('Bearer ', ''), cost)
 
-
-            receipts.add(data.get('product_name'), data.get('count'),request.headers["Authorization"].replace('Bearer ', '') ,cost)
+            receipts.add(data.get('product_name'), data.get(
+                'count'), request.headers["Authorization"].replace('Bearer ', ''), cost)
 
             return jsonify({"success": True, "message": "Items are bought"})
 
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400
-
-

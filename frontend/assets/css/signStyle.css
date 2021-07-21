@@ -16,7 +16,6 @@
 }
 
 .signupContainer {
-  height: 100%;
   background-color: lightgray;
   text-align: center;
   justify-content: center;
@@ -24,6 +23,9 @@
   flex-direction: column;
   align-items: center;
   grid-gap: 30px;
+
+  height: 100%;
+  flex-grow: 1;
 }
 
 .inputDiv {

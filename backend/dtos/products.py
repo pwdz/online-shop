@@ -2,7 +2,7 @@ from marshmallow import Schema, fields
 
 class AddProductInput(Schema):
     name = fields.Str(required=True)
-    category = fields.Str(required=True)
+    category = fields.Str(required=False)
     price = fields.Int(required=True)
     count = fields.Int(required=True)
     

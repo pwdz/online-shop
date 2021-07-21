@@ -221,10 +221,10 @@ def add_product():
         return res
     try:
         res = products.addNew(data.get('name'),
-                              data.get('category'),
                               data.get('price'),
                               data.get('count'),
-                              soldCount=0
+                              soldCount = 0,
+                              category = data.get('category'),
                               # img = request.form.get('image')
                               )
         return jsonify({"success": True, "data": res})

@@ -1,5 +1,6 @@
 from backend.extensions import mongo
 from backend.settings import SECRET_KEY
+import backend.services.products as productService
 
 
 def add_new(name, default=False):
@@ -18,18 +19,22 @@ def add_new(name, default=False):
 
 def edit(cat_name, new_name=None):
     categories = mongo.db.categories
-
+    products = mongo.db.products
     category = categories.find_one({'name': cat_name})
 
     if category is None:
         raise Exception('Category is not found!')
-
     if new_name:
         category["name"] = new_name
+        product_records = products.find({'category': cat_name})
+        for product_record in product_records:
+            productService.update_category(
+                product_record['name'], new_name)
 
     categories.save(category)
     category['_id'] = str(category['_id'])
-    return True
+
+    return category
 
 
 def get_list():
@@ -44,13 +49,28 @@ def get_list():
 
 def remove(name):
     categories = mongo.db.categories
+    products = mongo.db.products
     record = categories.find_one({'name': name})
     if record is None:
         raise Exception('Category is not found')
     if record['default'] is True:
         raise Exception("Default category can't be removed")
 
+    product_records = products.find({'category': record['name']})
+    for product_record in product_records:
+        productService.update_category(product_record['name'])
+
     categories.remove(record)
     record['_id'] = str(record['_id'])
 
     return record
+
+
+def exists(name):
+    categories = mongo.db.categories
+    record = categories.find_one({'name': name})
+
+    if record:
+        return True
+    else:
+        return False

@@ -54,7 +54,7 @@ body {
   /* grid-template-columns: 1fr 1fr; */
   /* grid-gap: 100px; */
   margin-bottom: 4%;
-  Overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 .menu {
@@ -132,7 +132,7 @@ body {
 .arrow {
   box-sizing: border-box;
   height: 8px;
-  width: 30px;
+  width: 20px;
   border-style: solid;
   border-color: black;
   border-width: 0px 1px 1px 0px;
@@ -229,7 +229,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('../images/slideshow/1.jpg');
+  background-image: url("../images/slideshow/1.jpg");
   background-size: 100%;
 }
 
@@ -592,7 +592,8 @@ footer {
   align-items: center;
 }
 
-.prev, .next {
+.prev,
+.next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -612,13 +613,14 @@ footer {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
-.prev{
+.prev {
   left: 0;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 .fade {
   -webkit-animation-name: fade;
@@ -628,11 +630,19 @@ footer {
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }

@@ -16,14 +16,15 @@ def add(product_name, number_of_products, me, price, state='processing'):
     name = ''
     lastname = ''
     address = ''
-    if user['name']:
+
+    if 'name' in user:
         name = user['name']
-    if user['lastname']:
+    if 'lastname' in user:
         lastname = user['lastname']
-    if user['address']:
+    if 'address' in user:
         address = user['address']
 
-    tracking = str(user['_id'])[0:4] + randint(10, 99)
+    tracking = str(user['_id'])[0:4] + str(randint(10, 99))
     new_receipt = {'product': product_name, 'number': number_of_products,
                    'user': ObjectId(user['_id']), 'name': name, 'lastname': lastname, 'tracking': tracking, 'address': address, 'price': price, 'date': datetime.now(), 'state': state}
 

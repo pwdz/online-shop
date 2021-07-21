@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask.helpers import flash, make_response
 from flask import Flask, render_template, url_for, request, session, redirect, jsonify
-from backend.dtos.users import RegisterInput, LoginInput, IncreaseBalance, EditInput
+from backend.dtos.users import RegisterInput, LoginInput, IncreaseBalance, EditInput, BuyInput
 from backend.dtos.categories import AddInput, RemoveInput, EditInput
 from backend.dtos.receipts import ChangeInput
 import backend.services.users as users
@@ -18,6 +18,7 @@ register_schema = RegisterInput()
 increase_balance_schema = IncreaseBalance()
 user_edit_schema = EditInput()
 login_schema = LoginInput()
+buy_schema = BuyInput()
 category_input_schema = AddInput()
 category_remove_schema = RemoveInput()
 category_edit_schema = EditInput()
@@ -245,7 +246,7 @@ def add_product():
         return jsonify({"success": False, "message": e.args}), 400
 
 
-@main.route('/products/list', methods=['GET'])
+@main.route('/products/list', methods=['GET', 'POST'])
 def get_products_list():
     data = request.form
     errors = productfilter_input_schema.validate(data)
@@ -293,3 +294,35 @@ def edit_product():
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400
+
+@main.route('/users/buy', methods=['POST'])
+def buy_products():
+    data = request.form
+    errors = buy_schema.validate(data)
+    if errors:
+        return jsonify({"success": False, "message": errors}), 400
+    try:
+        product_exists, product_price = products.check_storage(data.get('product_name'), data.get('count'))
+
+        cost = product_price * int(data.get('count'))
+        has_enough_balance = users.check_balance(request.headers["Authorization"].replace('Bearer ', ''), cost)
+
+        if not product_exists:
+            return jsonify({"success": False, "message": "storage doesn't gave enought of this product"})
+        elif not has_enough_balance:
+            return jsonify({"success": False, "message": "You don't have enough balance. Charge you wallet first."})
+        else:
+            products.buy_product(data.get('product_name'), data.get('count'))
+
+            users.decrease_balance(request.headers["Authorization"].replace('Bearer ', ''), cost)            
+
+
+            receipts.add(data.get('product_name'), data.get('count'),request.headers["Authorization"].replace('Bearer ', '') ,cost)
+
+            return jsonify({"success": True, "message": "Items are bought"})
+
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": e.args}), 400
+
+

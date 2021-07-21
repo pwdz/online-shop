@@ -31,3 +31,8 @@ class LoginInput(Schema):
 
 class IncreaseBalance(Schema):
     balance = fields.Int(required=False)
+
+class BuyInput(Schema):
+    product_name = fields.Str(required=True)
+    count = fields.Int(required=True)
+    

@@ -71,19 +71,18 @@ def edit(currName, newName=None, newCategory=None, newCount=None, newPrice=None,
     products.save(product)
 
     return True
-def get_list(category = None, priceAscending = None, priceDescending = None, date = None, priceRangeMin = None, priceRangeMax = None):
+def get_list(category = None, price_ascending = None, price_descending = None, date = None, price_range_min = None, price_range_max = None):
     products = mongo.db.products
     
     filter = [("soldCount", pymongo.DESCENDING)]
     if category:
         records = products.find({'category': category})
-    elif priceRangeMax and priceRangeMin:
-        print(priceRangeMax, priceRangeMin)
-        records = products.find({'price': {'$gte': int(priceRangeMin), '$lte': int(priceRangeMax)}})
+    elif price_range_max and price_range_min:
+        records = products.find({'price': {'$gte': int(price_range_min), '$lte': int(price_range_max)}})
     else:
-        if priceAscending:
+        if price_ascending:
             filter = [("price", pymongo.ASCENDING)]
-        elif priceDescending:
+        elif price_descending:
             filter = [("price", pymongo.DESCENDING)]
         elif date:
             filter = [("timestamp", pymongo.DESCENDING)]
@@ -95,3 +94,25 @@ def get_list(category = None, priceAscending = None, priceDescending = None, dat
         record['_id'] = str(record['_id'])
         output.append(record)
     return output
+
+def check_storage(product_name, amount):
+    products = mongo.db.products
+    product = products.find_one({'name': product_name})
+
+    if not product:
+        raise Exception("Product doesn't exists!")
+    
+    return product['remainingCount'] >= int(amount), product['price']
+
+def buy_product(product_name, amount):
+    products = mongo.db.products
+    product = products.find_one({'name': product_name})
+
+    if not product:
+        raise Exception("Product doesn't exists!")
+    
+    product['remainingCount'] = product['remainingCount'] - int(amount)
+    product['soldCount'] = product['soldCount'] + int(amount)
+    products.save(product)    
+
+    return True

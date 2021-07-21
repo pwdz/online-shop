@@ -100,3 +100,12 @@ def check_token(token):
         valid = False
 
     return valid
+
+def check_balance(me, cost):
+    users = mongo.db.users
+    user = users.find_one({'token': me})
+
+    if user is None:
+        raise Exception('User is not found!')
+
+    return user['balance'] >= cost

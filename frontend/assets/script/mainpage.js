@@ -1,7 +1,7 @@
 const dropBtnText = document.getElementById("dropBtnText");
 const signInBtn = document.getElementById("signin");
 const dropBtn = document.getElementById("dropbtn");
-const profileBtn = document.getElementById("profileBtn");
+
 
 
 if (localStorage.getItem('name')) {
@@ -12,12 +12,19 @@ if (localStorage.getItem('name')) {
     signInBtn.style.display = 'block';
     dropBtn.style.display = 'none'
 }
-console.log('here');
 
 function profileBtnClick() {
-    console.log('heloooooooooooooo');
+    console.log("uhuhuhu");
     location.href = '../frontend/userProfile.html';
 }
+
+function logoutBtnClick() {
+    console.log("hiiiiiiiiiiiiiiii");
+    localStorage.clear()
+    location.href = '../frontend/index.html';
+}
+
+
 
 // console.log(profileBtnClick())
 

@@ -1,10 +1,10 @@
 from backend.extensions import mongo
 from bson.objectid import ObjectId
 from datetime import datetime
-from random import seed
-from random import randint
+import random
+import string
 # seed random number generator
-seed(1)
+
 
 # print(mongo)
 
@@ -24,7 +24,10 @@ def add(product_name, number_of_products, me, price, state='processing'):
     if 'address' in user:
         address = user['address']
 
-    tracking = str(user['_id'])[0:4] + str(randint(10, 99))
+    tracking = ''.join((random.choice(string.ascii_lowercase)
+                        for x in range(10)))
+
+    print(tracking)
     new_receipt = {'product': product_name, 'number': number_of_products,
                    'user': ObjectId(user['_id']), 'name': name, 'lastname': lastname, 'tracking': tracking, 'address': address, 'price': price, 'date': datetime.now(), 'state': state}
 
@@ -40,13 +43,15 @@ def get_list(me=None, tracking=None):
     output = []
 
     if me:
+
         users = mongo.db.users
         user = users.find_one({'token': me})
-        records = receipts.find({ObjectId(user['_id'])})
+        records = receipts.find({'user': ObjectId(user['_id'])})
         for record in records:
             record['_id'] = str(record['_id'])
-        output.append({'_id': record['_id'], 'product': record['product'], 'number': record['number'],
-                       'address': record['address'], 'price': record['price'], 'date': record['date'], 'state': record['state']})
+            output.append({'_id': record['_id'], 'product': record['product'], 'number': record['number'],
+                           'address': record['address'], 'price': record['price'], 'date': record['date'], 'state': record['state']})
+
     else:
         if tracking:
             records = receipts.find({'tracking': tracking})
@@ -54,7 +59,8 @@ def get_list(me=None, tracking=None):
             records = receipts.find()
         for record in records:
             record['_id'] = str(record['_id'])
-        output.append(record)
+            record['user'] = str(record['user'])
+            output.append(record)
 
     return output
 
@@ -70,5 +76,5 @@ def change_state(receipt_id, state):
 
     receipts.save(receipt)
     receipt['_id'] = str(receipt['_id'])
-
+    receipt['user'] = str(receipt['user'])
     return receipt

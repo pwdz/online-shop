@@ -1,4 +1,7 @@
+from datetime import date
+import pymongo
 from backend.extensions import mongo
+import time
 
 
 def addNew(name, price, count, soldCount, category = None, img = None):
@@ -11,7 +14,7 @@ def addNew(name, price, count, soldCount, category = None, img = None):
     if not category:
         categories = mongo.db.categories
         category = categories.find_one({'default': True})['name']
-    newProduct = {'name': name, 'category': category, 'price': int(price), 'remainingCount': int(count), 'soldCount': int(soldCount), 'image': img}
+    newProduct = {'name': name, 'category': category, 'price': int(price), 'remainingCount': int(count), 'soldCount': int(soldCount), 'timestamp': int(time.time()), 'image': img}
     products.insert(newProduct)
 
     return True
@@ -44,9 +47,22 @@ def edit(currName, newName = None, newCategory = None, newCount = None, newPrice
         
     return True
     
-def get_list():
+def get_list(category = None, priceAscending = None, priceDescending = None, date = None):
     products = mongo.db.products
-    records = products.find()
+    
+    filter = [("soldCount", pymongo.DESCENDING)]
+    if category:
+        records = products.find({'category': category})
+    else:
+        if priceAscending:
+            filter = [("price", pymongo.ASCENDING)]
+        elif priceDescending:
+            filter = [("price", pymongo.DESCENDING)]
+        elif date:
+            filter = [("timestamp", pymongo.DESCENDING)]
+
+        records = products.find().sort(filter)
+        
     output = []
     for record in records:
         record['_id'] = str(record['_id'])

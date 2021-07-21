@@ -10,7 +10,7 @@ import backend.services.products as products
 import backend.services.categories as categories
 import backend.services.receipts as receipts
 import backend.utils.login as loginService
-from backend.dtos.products import AddProductInput, EditProductInput
+from backend.dtos.products import AddProductInput, EditProductInput, GetProductInput
 from functools import wraps
 
 main = Blueprint('main', __name__)
@@ -20,6 +20,7 @@ category_input_schema = AddInput()
 receipt_input_schema = ChangeInput()
 product_input_schema = AddProductInput()
 productedit_input_schema = EditProductInput()
+productfilter_input_schema = GetProductInput()
 
 
 def login_required(f):
@@ -155,7 +156,7 @@ def add_category():
     if errors:
         return jsonify({"success": False, "message": errors}), 400
     try:
-        res = categories.add_new(request.form.get('name'))
+        res = categories.add_new(request.form.get('catName'))
         return jsonify({"success": True, "data": res})
 
     except Exception as e:
@@ -234,8 +235,16 @@ def add_product():
 
 @main.route('/products/list', methods=['GET'])
 def get_products_list():
+    data = request.form
+    errors = productfilter_input_schema.validate(data)
+    if errors:
+        res = make_response(
+            jsonify({"success": False, "message": errors}), 400)
+        res.headers.add("Access-Control-Allow-Origin", "*")
+        return res
+ 
     try:
-        res = products.get_list()
+        res = products.get_list(data.get('category'), data.get('price_ascending'), data.get('price_descending'), data.get('date'))
         return jsonify({"success": True, "data": res})
     except Exception as e:
         print(e)

@@ -1,3 +1,4 @@
+# from typing_extensions import Required
 from marshmallow import Schema, fields
 
 class AddProductInput(Schema):
@@ -12,4 +13,10 @@ class EditProductInput(Schema):
     new_category = fields.Str(required=False)
     new_price = fields.Int(required=False)
     new_count = fields.Int(required=False)
- 
+
+class GetProductInput(Schema):
+    category = fields.Str(required=False)
+    price_descending = fields.Bool(required=False)
+    price_ascending = fields.Bool(required=False)
+    date = fields.Bool(requied=False)   
+    

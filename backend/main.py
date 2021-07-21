@@ -296,6 +296,7 @@ def edit_product():
         return jsonify({"success": False, "message": e.args}), 400
 
 @main.route('/users/buy', methods=['POST'])
+@login_required
 def buy_products():
     data = request.form
     errors = buy_schema.validate(data)

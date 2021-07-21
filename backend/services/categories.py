@@ -7,15 +7,15 @@ from bson.objectid import ObjectId
 
 def addNew(name, default=False):
     categories = mongo.db.categories
-    newCategory = {'name': name, 'default': default}
+    new_category = {'name': name, 'default': default}
     existing_category = categories.find_one({'name': name})
 
     if existing_category is not None:
-        raise Exception('Category already exists!')
+        return existing_category
 
-    categories.insert(newCategory)
+    categories.insert(new_category)
 
-    return True
+    return new_category
 
 
 def edit(name=None):

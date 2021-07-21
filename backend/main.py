@@ -1,9 +1,10 @@
 from flask import Blueprint
 from flask.helpers import flash, make_response
-from pymongo import message
 from flask import Flask, render_template, url_for, request, session, redirect, jsonify
 from backend.dtos.users import RegisterInput, LoginInput
 import backend.services.users as users
+import backend.services.admins as admins
+import backend.utils.login as loginService
 from functools import wraps
 
 main = Blueprint('main', __name__)
@@ -27,15 +28,22 @@ def login_required(f):
             return redirect(url_for('main.login'))
     return wrap
 
-# def admin_login_required(f):
-#     @wraps(f)
-#     def wrap(*args, **kwargs):
-#         if 'admin' in session:
-#             return f(*args, **kwargs)
-#         else:
-#             flash('You need to login as admin first')
-#             return redirect(url_for('login'))
-#     return wrap
+
+def admin_login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if "Authorization" in request.headers:
+            valid = admins.check_token(
+                request.headers["Authorization"].replace('Bearer ', ''))
+            if valid:
+                return f(*args, **kwargs)
+            else:
+                flash('You need to login first')
+                return redirect(url_for('main.login'))
+        else:
+            flash('You need to login first')
+            return redirect(url_for('main.login'))
+    return wrap
 
 
 @main.route('/register', methods=['POST'])
@@ -46,7 +54,7 @@ def register():
     try:
         res = users.register(request.form['email'], request.form['password'],
                              request.form.get('name', None),  request.form.get('lastname', None), request.form.get('address', None))
-
+        print(res)
         return jsonify({"success": True, "data": res})
     except Exception as e:
         print(e)
@@ -64,7 +72,7 @@ def login():
             res.headers.add("Access-Control-Allow-Origin", "*")
             return res
         try:
-            res = users.login(data['email'], data['password'])
+            res = loginService.login(data['email'], data['password'])
             session['token'] = res['token']
             # session['logged_in'] = True
             res = make_response(jsonify({"success": True, "data": res}), 200)

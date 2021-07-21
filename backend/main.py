@@ -27,7 +27,6 @@ product_input_schema = AddProductInput()
 productedit_input_schema = EditProductInput()
 productfilter_input_schema = GetProductInput()
 
-
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -61,6 +60,16 @@ def admin_login_required(f):
             return redirect(url_for('main.login'))
     return wrap
 
+@main.after_request
+def add_cors_headers(response):
+    whitelist = ['127.0.0.1:5000']
+    parts = request.base_url.split("/")
+    base_url = parts[2]
+    if base_url in whitelist:
+        response.headers.add("Access-Control-Allow-Origin", "*")
+
+    return response
+
 
 @main.route('/register', methods=['POST'])
 def register():
@@ -85,25 +94,25 @@ def login():
         if errors:
             res = make_response(
                 jsonify({"success": False, "message": errors}), 400)
-            res.headers.add("Access-Control-Allow-Origin", "*")
+            # res.headers.add("Access-Control-Allow-Origin", "*")
             return res
         try:
             res = loginService.login(data['email'], data['password'])
             session['token'] = res['token']
             # session['logged_in'] = True
             res = make_response(jsonify({"success": True, "data": res}), 200)
-            res.headers.add("Access-Control-Allow-Origin", "*")
+            # res.headers.add("Access-Control-Allow-Origin", "*")
 
             return res
         except Exception as e:
             print(e)
             res = make_response(
                 jsonify({"success": False, "message": e.args}), 400)
-            res.headers.add("Access-Control-Allow-Origin", "*")
+            # res.headers.add("Access-Control-Allow-Origin", "*")
             return res
     res = make_response(
         jsonify({"success": False, "message": "Redirected to login page"}), 400)
-    res.headers.add("Access-Control-Allow-Origin", "*")
+    # res.headers.add("Access-Control-Allow-Origin", "*")
     return res
 
 
@@ -247,6 +256,7 @@ def add_product():
 
 
 @main.route('/products/list', methods=['GET', 'POST'])
+# @add_cors_headers
 def get_products_list():
     data = request.form
     errors = productfilter_input_schema.validate(data)
@@ -258,7 +268,7 @@ def get_products_list():
  
     try:
         res = products.get_list(data.get('category'), data.get('price_ascending'), data.get('price_descending'), data.get('date'), data.get('price_range_min'), data.get('price_range_max'))
-        return jsonify({"success": True, "data": res})
+        return make_response(jsonify({"success": True, "data": res}), 200)
     except Exception as e:
         print(e)
         return jsonify({"success": False, "message": e.args}), 400

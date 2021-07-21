@@ -1,5 +1,6 @@
 from backend.extensions import mongo
 from backend.settings import SECRET_KEY
+import backend.services.products as productService
 
 
 def add_new(name, default=False):
@@ -52,7 +53,20 @@ def remove(name):
         raise Exception("Default category can't be removed")
 
     product_records = products.find({'category': record['name']})
+    for product_record in product_records:
+        productService.update_category(product_record['name'])
+
     categories.remove(record)
     record['_id'] = str(record['_id'])
 
     return record
+
+
+def exists(name):
+    categories = mongo.db.categories
+    record = categories.find_one({'name': name})
+
+    if record:
+        return True
+    else:
+        return False

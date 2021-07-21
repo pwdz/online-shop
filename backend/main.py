@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask.helpers import flash, make_response
 from flask import Flask, render_template, url_for, request, session, redirect, jsonify
 from backend.dtos.users import RegisterInput, LoginInput, IncreaseBalance, EditInput
-from backend.dtos.categories import AddInput, RemoveInput
+from backend.dtos.categories import AddInput, RemoveInput, EditInput
 from backend.dtos.receipts import ChangeInput
 import backend.services.users as users
 import backend.services.admins as admins
@@ -20,6 +20,7 @@ user_edit_schema = EditInput()
 login_schema = LoginInput()
 category_input_schema = AddInput()
 category_remove_schema = RemoveInput()
+category_edit_schema = EditInput()
 receipt_input_schema = ChangeInput()
 product_input_schema = AddProductInput()
 productedit_input_schema = EditProductInput()
@@ -175,7 +176,7 @@ def add_category():
 @main.route('/admins/categories', methods=['PUT'])
 @admin_login_required
 def edit_category():
-    errors = category_input_schema.validate(request.form)
+    errors = category_edit_schema.validate(request.form)
     if errors:
         return jsonify({"success": False, "message": errors}), 400
     try:
@@ -230,10 +231,10 @@ def add_product():
         return res
     try:
         res = products.addNew(data.get('name'),
-                              data.get('category'),
                               data.get('price'),
                               data.get('count'),
-                              soldCount=0
+                              soldCount=0,
+                              category=data.get('category'),
                               # img = request.form.get('image')
                               )
         return jsonify({"success": True, "data": res})

@@ -1,12 +1,20 @@
 from backend.extensions import mongo
+import backend.services.categories as categoryService
 
 
-def addNew(name, category, price, count, soldCount=0, img=None):
+def addNew(name, price, count, soldCount=0, category=None, img=None):
     products = mongo.db.products
     existingProd = products.find_one({'name': name})
 
     if existingProd:
         raise Exception('Product already exists!')
+
+    if not category:
+        categories = mongo.db.categories
+        category = categories.find_one({'default': True})['name']
+    else:
+        if not categoryService.exists(category):
+            raise Exception('Category is not found')
 
     newProduct = {'name': name, 'category': category, 'price': price,
                   'remainingCount': count, 'soldCount': soldCount, 'image': img}
@@ -42,11 +50,9 @@ def edit(currName, newName=None, newCategory=None, newCount=None, newPrice=None,
     if newName:
         product['name'] = newName
     if newCategory:
-        categories = mongo.db.categories
-        existingCategory = categories.find_one({'name': newCategory})
-
-        if not existingCategory:
+        if not categoryService.exists(newCategory):
             raise Exception("Invalid category!")
+
         product['category'] = newCategory
 
     if newPrice:

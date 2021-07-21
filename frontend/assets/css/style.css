@@ -54,6 +54,7 @@ body {
   /* grid-template-columns: 1fr 1fr; */
   /* grid-gap: 100px; */
   margin-bottom: 4%;
+  Overflow-y:scroll;
 }
 
 .menu {

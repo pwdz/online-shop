@@ -3,30 +3,31 @@ import bcrypt
 from backend.settings import SECRET_KEY
 import jwt
 from bson.objectid import ObjectId
+import backend.utils.login as loginService
 
 # print(mongo)
 
 
 def register(email, password, name=None, lastname=None, address=None):
     users = mongo.db.users
-    newUser = {'email': email, 'balance': 0}
+    new_user = {'email': email, 'balance': 0}
     existing_user = users.find_one({'email': email})
 
     if existing_user is not None:
         raise Exception('That username already exists!')
 
     hashpass = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-    newUser['password'] = hashpass.decode('utf-8')
+    new_user['password'] = hashpass.decode('utf-8')
     if name:
-        newUser['name'] = name
+        new_user['name'] = name
     if lastname:
-        newUser['lastname'] = lastname
+        new_user['lastname'] = lastname
     if address:
-        newUser['address'] = address
+        new_user['address'] = address
 
-    users.insert(newUser)
-
-    return newUser
+    users.insert(new_user)
+    new_user['_id'] = str(new_user['_id'])
+    return new_user
 
 
 def increase_balance(me, balance):
@@ -55,33 +56,19 @@ def edit(me, password=None, name=None, lastname=None, address=None):
         user['address'] = address
 
     users.save(user)
-
+    user['_id'] = str(user['_id'])
     return user
 
 
-def login(email, password):
+def login(login_user, email, password):
     users = mongo.db.users
-    login_user = users.find_one({'email': email})
-
-    if login_user:
-        if bcrypt.hashpw(password.encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
-            token = generate_token(login_user['_id'])
-            login_user['token'] = token.decode(encoding="utf-8")
-            users.save(login_user)
-            return {'email': email, 'token': login_user['token']}
-
-    raise Exception('Invalid username/password combination')
-
-
-def generate_token(user_id):
-    try:
-        payload = {
-            'id': str(user_id)
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-        return token
-    except Exception as e:
-        return e
+    if bcrypt.hashpw(password.encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+        token = loginService.generate_token(login_user['_id'])
+        login_user['token'] = token.decode(encoding="utf-8")
+        users.save(login_user)
+        return {'email': email, 'token': login_user['token']}
+    else:
+        raise Exception('Invalid credentials')
 
 
 def check_token(token):

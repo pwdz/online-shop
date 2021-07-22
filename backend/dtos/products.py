@@ -21,4 +21,5 @@ class GetProductInput(Schema):
     date = fields.Bool(requied=False)   
     price_range_min = fields.Int(required=False)
     price_range_max = fields.Int(required=False)
+    name = fields.Str(required=False)
     

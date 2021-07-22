@@ -74,7 +74,7 @@ def edit(currName, newName=None, newCategory=None, newCount=None, newPrice=None,
     return True
 
 
-def get_list(category=None, price_ascending=None, price_descending=None, date=None, price_range_min=None, price_range_max=None):
+def get_list(category=None, price_ascending=None, price_descending=None, date=None, price_range_min=None, price_range_max=None, name=None):
     products = mongo.db.products
 
     filter = [("soldCount", pymongo.DESCENDING)]
@@ -83,13 +83,15 @@ def get_list(category=None, price_ascending=None, price_descending=None, date=No
     elif price_range_max and price_range_min:
         records = products.find(
             {'price': {'$gte': int(price_range_min), '$lte': int(price_range_max)}})
+    elif name:
+        print(":)))))))))))))))")
+        records = products.find({"name" : {"$regex" : name}});
     else:
         if price_ascending:
             filter = [("price", pymongo.ASCENDING)]
         elif price_descending:
             filter = [("price", pymongo.DESCENDING)]
         elif date:
-            print("sdsdsdsdsdd")
             filter = [("timestamp", pymongo.DESCENDING)]
 
         records = products.find().sort(filter)

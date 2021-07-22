@@ -289,7 +289,7 @@ def get_products_list():
 
     try:
         res = products.get_list(data.get('category'), data.get('price_ascending'), data.get(
-            'price_descending'), data.get('date'), data.get('price_range_min'), data.get('price_range_max'))
+            'price_descending'), data.get('date'), data.get('price_range_min'), data.get('price_range_max'), data.get('name'))
         return make_response(jsonify({"success": True, "data": res}), 200)
     except Exception as e:
         print(e)

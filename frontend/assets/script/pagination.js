@@ -13,6 +13,21 @@ var priceAscSort = document.getElementById("priceAscSort");
 var priceDesSort = document.getElementById("priceDesSort")
 var soldSort = document.getElementById("soldSort")
 var dateSort = document.getElementById("dateSort")
+
+var searchBtn = document.getElementById("search-btn")
+var searchInput = document.getElementById("search-input")
+searchBtn.onclick = search
+searchInput.onkeydown = function(event){
+    if(event.keyCode == 13){
+        search()
+    }
+}
+function search(){
+    txt = searchInput.value
+    getProducts(false, "name", txt)
+}
+
+
 priceAscSort.onclick = function(){
     console.log("Asc")
     getProducts(false, "price_ascending", true)

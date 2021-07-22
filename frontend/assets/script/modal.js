@@ -37,6 +37,7 @@ async function clickSignUpBtn() {
         formBody = formBody.join("&");
 
         try {
+
             const res = await fetch('http://127.0.0.1:5000/register', {
                 method: 'POST',
                 headers: {
@@ -49,8 +50,7 @@ async function clickSignUpBtn() {
             if (resData.success) {
                 text = "ثبت نام موفقیت آمیز است";
                 textColor = "green";
-                console.log("he;llo");
-                const resLoginData = await fetchLogin({ email: registerData.email, password: registerData.password })
+                const resLoginData = await fetchUrl({ email: registerData.email, password: registerData.password }, 'http://127.0.0.1:5000/login', 'POST')
                 console.log(resLoginData);
                 if (resLoginData.success) {
                     console.log(resLoginData);
@@ -95,7 +95,7 @@ async function clickSignInBtn() {
         // if (inputCheck.includes(true)) {
         try {
             const loginData = getLoginInput()
-            const resData = await fetchLogin(loginData)
+            const resData = await fetchUrl(loginData, 'http://127.0.0.1:5000/login', 'POST')
             console.log(resData);
             if (resData.success) {
                 text = "ورود موفقیت آمیز است";
@@ -117,15 +117,32 @@ async function clickSignInBtn() {
     modal.style.display = "block";
 }
 
-function clickEditBtn() {
+async function clickEditBtn() {
     const valid = checkFinalEditValidation();
     let text = "";
     let textColor = "black";
     if (!valid) {
         text = "اطلاعات وارد شده معتبر نمی باشد";
     } else {
-        text = "ویرایش موفقیت آمیز است";
-        textColor = "green";
+        try {
+            const editData = getEditInput()
+            console.log(editData);
+            console.log('http://127.0.0.1:5000/users/edit');
+            const resData = await fetchUrl(editData, 'http://127.0.0.1:5000/users/edit', 'PUT')
+            console.log(resData);
+            if (resData.success) {
+                text = "ویرایش موفقیت آمیز است";
+                textColor = "green";
+                localStorage.setItem('name', resData.data.name)
+                dropBtnText.innerText = localStorage.getItem('name')
+            }
+            else {
+                text = "اطلاعات وارد شده معتبر نمی باشد";
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
     modalText.innerText = text;
     modalText.style.color = textColor;
@@ -134,14 +151,14 @@ function clickEditBtn() {
 }
 
 // When the user clicks on <span> (x), close the modal
-function clickSpanBtn() {
+function clickSpanBtn(isEdit = false) {
     modal.style.animationName = "fadeOut_Modal";
     modalContent.style.animationName = "fadeOut_Container";
     modal.style.display = "none";
     modal.style.animationName = "fadeIn_Modal";
     modalContent.style.animationName = "fadeIn_Container";
 
-    if (modalText.style.color == "green") {
+    if (!isEdit && modalText.style.color == "green") {
         location.href = '../frontend/index.html';
     }
 
@@ -153,22 +170,25 @@ window.onclick = function (event) {
     }
 }
 
-async function fetchLogin(loginData) {
+async function fetchUrl(data, url, reqMethod) {
     let formBody = [];
-    for (const property in loginData) {
+    for (const property in data) {
         const encodedKey = encodeURIComponent(property);
-        const encodedValue = encodeURIComponent(loginData[property]);
+        const encodedValue = encodeURIComponent(data[property]);
         formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
     console.log(formBody);
-    const res = await fetch('http://127.0.0.1:5000/login', {
-        method: 'POST',
+    console.log(url);
+    const res = await fetch(url, {
+        method: reqMethod,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
         },
         body: formBody
     })
+    console.log(url);
     const resData = await res.json()
     return resData
 }
+

@@ -25,7 +25,7 @@
         <section class="container" id="userProfileContainer">
             <div class="menu"> 
                 <div class="left" id="left">
-                    <button type="button" class="signin" id = "signin">ورود/ثبت نام</button>
+                    <button type="button" class="signin" id = "signin" onclick="mainPageSignBtnClick();">ورود/ثبت نام</button>
                     <button class="dropbtn" id="dropbtn"> 
                         <div class="arrow"></div>
                         <div class="dropBtnText" id="dropBtnText">Dropdown</div>
@@ -61,7 +61,7 @@
                     <div class="modal" id="myModal">
                         <!-- Modal content -->
                         <div class="modal-content" id="modal-content">
-                        <span class="close" onclick="clickSpanBtn();" on>&times;</span>
+                        <span class="close" onclick="clickSpanBtn(true);" on>&times;</span>
                         <p id="contentText"></p>
                         </div>
                     

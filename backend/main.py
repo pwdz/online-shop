@@ -27,6 +27,7 @@ product_input_schema = AddProductInput()
 productedit_input_schema = EditProductInput()
 productfilter_input_schema = GetProductInput()
 
+
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -60,24 +61,28 @@ def admin_login_required(f):
             return redirect(url_for('main.login'))
     return wrap
 
+
 @main.after_request
 def add_cors_headers(response):
     whitelist = ['127.0.0.1:5000']
     parts = request.base_url.split("/")
+    print(parts)
     base_url = parts[2]
     if base_url in whitelist:
         response.headers.add("Access-Control-Allow-Origin", "*")
+        # response.headers.add("Access-Control-Allow-Methods",
+                            #  'GET,PUT,POST,DELETE,OPTIONS,HEAD')
 
     return response
 
 
-@main.route('/register', methods=['POST'])
+@main.route('/register', methods = ['POST'])
 def register():
-    errors = register_schema.validate(request.form)
+    errors=register_schema.validate(request.form)
     if errors:
         return jsonify({"success": False, "message": errors}), 400
     try:
-        res = users.register(request.form['email'], request.form['password'],
+        res=users.register(request.form['email'], request.form['password'],
                              request.form.get('name', None),  request.form.get('lastname', None), request.form.get('address', None))
         print(res)
         return jsonify({"success": True, "data": res})
@@ -86,13 +91,13 @@ def register():
         return jsonify({"success": False, "message": e.args}), 400
 
 
-@main.route('/login', methods=['POST', 'GET'])
+@main.route('/login', methods = ['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        data = request.form
-        errors = login_schema.validate(data)
+        data=request.form
+        errors=login_schema.validate(data)
         if errors:
-            res = make_response(
+            res=make_response(
                 jsonify({"success": False, "message": errors}), 400)
             # res.headers.add("Access-Control-Allow-Origin", "*")
             return res
@@ -119,6 +124,7 @@ def login():
 @main.route('/users/edit', methods=['PUT'])
 @login_required
 def edit():
+    print("jijijiiiii")
     errors = user_edit_schema.validate(request.form)
     if errors:
         return jsonify({"success": False, "message": errors}), 400
@@ -282,7 +288,8 @@ def get_products_list():
         return res
 
     try:
-        res = products.get_list(data.get('category'), data.get('price_ascending'), data.get('price_descending'), data.get('date'), data.get('price_range_min'), data.get('price_range_max'))
+        res = products.get_list(data.get('category'), data.get('price_ascending'), data.get(
+            'price_descending'), data.get('date'), data.get('price_range_min'), data.get('price_range_max'))
         return make_response(jsonify({"success": True, "data": res}), 200)
     except Exception as e:
         print(e)

@@ -14,14 +14,22 @@ if (localStorage.getItem('name')) {
 }
 
 function profileBtnClick() {
-    console.log("uhuhuhu");
-    location.href = '../frontend/userProfile.html';
+    console.log(localStorage.getItem('name'));
+    if (localStorage.getItem('name') == 'ادمین') {
+        location.href = '../frontend/profileReceiptAdmin.html';
+    } else {
+        location.href = '../frontend/userProfile.html';
+    }
+
 }
 
 function logoutBtnClick() {
-    console.log("hiiiiiiiiiiiiiiii");
     localStorage.clear()
     location.href = '../frontend/index.html';
+}
+
+function mainPageSignBtnClick() {
+    location.href = '../frontend/signin.html';
 }
 
 

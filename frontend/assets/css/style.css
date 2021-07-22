@@ -409,15 +409,6 @@ input[type="radio"]:checked::after {
   border: 2px solid transparent;
 }
 
-.priceRange {
-  display: flex;
-  flex-direction: column;
-  grid-gap: 2%;
-  background-color: lightgray;
-  align-items: right;
-  justify-content: right;
-}
-
 .product {
   width: calc((100% - 45px) / 3);
   height: 300px;
@@ -430,7 +421,7 @@ input[type="radio"]:checked::after {
   flex-direction: column;
   align-items: center;
 
-  /* display: none; */
+  display: none;
 }
 .productImage {
   width: calc(var(--product-cell-height) * 0.35);
@@ -492,17 +483,29 @@ hr.solid {
   font-weight: bold;
 }
 
+.priceRange {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 2%;
+  background-color: lightgray;
+  align-items: right;
+  justify-content: right;
+}
+
+
 .slidecontainer {
-  /* width: 100%; Width of the outside container */
   background-color: white;
   padding: 10% 2% 10% 2%;
+
+  display: flex;
+  flex-direction: row;
 }
 
 .slider {
   -webkit-appearance: none;
-  width: 20%;
+  width: 15%;
   height: 5px;
-  margin-left: -21.5%;
+  margin-left: 10px;
   position: absolute;
   background: lightgray;
   outline: none;
@@ -631,11 +634,11 @@ footer {
   align-items: center;
   justify-content: center;
   width: calc(100% - 15px);
-  height: 4%;
+  height: 40px;
   min-height: 40px;
-  background-color: blue;
-
+  /* background-color: blue; */
   display: none;
+
 }
 
 .empty{
@@ -645,4 +648,26 @@ footer {
   background-color: rgb(0, 0, 0,1);
   align-self: stretch;
 
+}
+
+.paginationNumber, .paginationL, .paginationR{
+  height: 80%;
+  
+  background-color: var(--white);
+  /* border-color: var(--blue-btn); */
+  border: none; 
+  box-shadow: 0px 2px 2px rgba(0, 157, 255, 0.616);
+
+  border-radius: 7px;
+  min-width: 30px;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: 10px;
+
+}
+
+.paginationL, .paginationR{
+  width: 10%;
+  margin-left: 5px;
+  margin-right: 5px;
 }

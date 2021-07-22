@@ -84,7 +84,6 @@ def get_list(category=None, price_ascending=None, price_descending=None, date=No
         records = products.find(
             {'price': {'$gte': int(price_range_min), '$lte': int(price_range_max)}})
     elif name:
-        print(":)))))))))))))))")
         records = products.find({"name" : {"$regex" : name}});
     else:
         if price_ascending:

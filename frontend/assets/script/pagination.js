@@ -56,7 +56,6 @@ async function getProducts(isInit = false, key = null, value=null){
             formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join("&");
-
         const res = await fetch('http://127.0.0.1:5000/products/list', {
             method: 'POST',
             headers: {
@@ -74,6 +73,9 @@ async function getProducts(isInit = false, key = null, value=null){
                 initProductCells();
                 setupPageButtons();
                 disableBtn(prevPageBtn)
+                for(let i=0; i<productCells.length; i++){
+                   console.log("----")
+                }
             }else{
                 updateProductCells();
                 loadPage(1)
@@ -129,6 +131,10 @@ function setProductCellValues(productCell, productValues){
     productCell.getElementsByClassName("productCat")[0].innerHTML = productValues['category']
     productCell.getElementsByClassName("priceNumber")[0].innerHTML = productValues['price']
     productCell.style.display = "flex";
+
+    productCell.getElementsByClassName("buyBtn")[0].onclick = function(){
+        openBuyModal(Number(productValues['price']), productValues['name'])
+    }
 
     // productCell.getElementsByClassName("productImage")[0].innerHTML = productValues['image']
 }
@@ -244,5 +250,99 @@ function setCategories(data){
         }
 
         categoryCell.parentNode.appendChild(categoryCells[i])
+    }
+}
+
+const modal = document.getElementById("myModal");
+const modalText = document.getElementById("contentText");
+const modalContent = document.getElementById("modal-content");
+const modalBuyBtn = document.getElementById("final-buy");
+const modalInput = document.getElementById("count-input");
+const finalCost = document.getElementById("final-cost");
+let pCount = 1
+let pPrice = 1
+modalInput.onkeyup = function(event){
+    if(event.keyCode >= 48 && event.keyCode <= 57){
+        console.log(modalInput.value)
+        pCount = Number(modalInput.value)
+        finalCost.innerHTML = pCount * pPrice
+    }
+    // console.log(modalInput.value)
+}
+function openBuyModal(productPrice, productName){
+    pPrice = productPrice
+    // textColor = "green";
+    // text = "salam"
+
+    // modalText.innerText = text;
+    // modalText.style.color = textColor;
+    finalCost.innerHTML = productPrice * pCount 
+    modalBuyBtn.onclick = function(){
+        finalBuy(productName, pCount)
+    }
+
+    modalText.style.marginRight = "5%";
+    modal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+function clickSpanBtn(isEdit = false) {
+    modal.style.animationName = "fadeOut_Modal";
+    modalContent.style.animationName = "fadeOut_Container";
+    modal.style.display = "none";
+    modal.style.animationName = "fadeIn_Modal";
+    modalContent.style.animationName = "fadeIn_Container";
+}
+
+window.onclick = function (event) {
+    if (event.target == modal) {
+        clickSpanBtn();
+    }
+}
+async function finalBuy(productName, count){
+    try {
+        let formBody = [];
+        
+        const encodedKey = encodeURIComponent("product_name");
+        const encodedValue = encodeURIComponent(productName);
+        formBody.push(encodedKey + "=" + encodedValue);
+        
+        const encodedKey1 = encodeURIComponent("count");
+        const encodedValue1 = encodeURIComponent(count);
+        formBody.push(encodedKey1 + "=" + encodedValue1);
+        
+        formBody = formBody.join("&");
+        // console.log(localStorage)
+        const res = await fetch('http://127.0.0.1:5000/users/buy', {
+            method: 'POST',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Authorization': localStorage.getItem('token'),
+                
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+
+            },
+            formBody
+        })
+        const resData = await res.json()
+        console.log(resData);
+        if (resData.success) {
+            textColor = "green";
+            text = "خرید شما با موفقیت انجام شد"
+
+            modalText.innerText = text;
+            modalText.style.color = textColor;
+        }
+        else {
+
+        }
+    } catch (error) {
+        console.log(error);
+        textColor = "red";
+        text = "ابتدا لاگین بفرمایید"
+
+        modalText.innerText = text;
+        modalText.style.color = textColor;
+    
     }
 }

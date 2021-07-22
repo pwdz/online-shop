@@ -32,11 +32,21 @@
   animation-name: fadeIn_Container;
   animation-duration: 1s;
 }
-
-/* The Close Button */
+#final-buy{
+  width: 70px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#count-input{
+  margin-bottom: 10px;
+  width: 50px;
+}
+#count-input:focus{
+  outline: none;
+}
 .close {
   color: #aaa;
-  float: right;
+  float: left;
   margin-top: -2%;
   font-size: 28px;
   font-weight: bold;

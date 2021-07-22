@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/modal.css">
 
     </head>
 
@@ -70,6 +71,17 @@
                     <div class="logo" id="logo" style="color: black; font-size: 16px; float: right; width: 20%;">:مرتب سازی بر اساس</div>   
                 </div>
             </div>
+            <div class="modal" id="myModal">
+                <!-- Modal content -->
+                <div class="modal-content" id="modal-content">
+                    <input type="text" name="count" id="count-input" placeholder="تعداد"></input>
+                    <p>مبلغ نهایی:<span id="final-cost">۱۰۰۰۰</span></p>
+                    <button type="button" id="final-buy" class="yellowBtn">خرید</button> 
+                    <span class="close" onclick="clickSpanBtn();">&times;</span>
+                    <p id="contentText"></p>
+                </div>
+            </div>
+
             <div class="productContainer">
                 <div class="pcleft" id="pcleft">
                     <div class="product">
@@ -84,7 +96,7 @@
                         </div>
                         <hr class="solid">
                         <div class="productPriceBuy">
-                            <button type="button" id="buy-btn">خرید محصول</button>
+                            <button type="button" class="buyBtn" id="buy-btn">خرید محصول</button>
                             <p class="price">
                                 <span class="priceNumber">۱۰.۰۰۰</span> تومان
                             </p> 

@@ -252,7 +252,7 @@ body {
 }
 
 #search-input:focus {
-  /* outline: 2px solid orange;     oranges! yey */
+  outline: none;
   color: black;
 }
 

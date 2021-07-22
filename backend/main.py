@@ -68,8 +68,10 @@ def add_cors_headers(response):
     parts = request.base_url.split("/")
     print(parts)
     base_url = parts[2]
-    if base_url in whitelist:
-        response.headers.add("Access-Control-Allow-Origin", "*")
+    # if base_url in whitelist:
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE,OPTIONS,HEAD')
+    response.headers.add("Access-Control-Allow-Headers", "*")
         # response.headers.add("Access-Control-Allow-Methods",
                             #  'GET,PUT,POST,DELETE,OPTIONS,HEAD')
 

@@ -183,7 +183,7 @@ def add_category():
     if errors:
         return jsonify({"success": False, "message": errors}), 400
     try:
-        res = categories.add_new(request.form.get('catName'))
+        res = categories.add_new(request.form.get('name'))
         return jsonify({"success": True, "data": res})
 
     except Exception as e:

@@ -1,3 +1,5 @@
+const categoryCell = document.getElementById("categoryCell")
+
 const pageCapacity = 3
 var pageNumber = 0
 
@@ -28,6 +30,7 @@ dateSort.onclick = function(){
     getProducts(false, "date", true)
 }
 getProducts(true);
+getCategories();
 async function getProducts(isInit = false, key = null, value=null){
     try {
 
@@ -178,4 +181,53 @@ function prevPage(){
 function loadPage(n){
     pageNumber = n - 1
     updateProductCells()
+}
+
+
+async function getCategories(){
+    try {
+
+        const res = await fetch('http://127.0.0.1:5000/categories/list', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            }
+        })
+        const resData = await res.json()
+        console.log(resData);
+        if (resData.success) {
+            console.log(resData.data)
+            categoriesData = resData.data
+
+            setCategories(categoriesData)
+
+        }
+        else {
+
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+function setCategories(data){
+    categoryCells = [categoryCell]
+    categoryCells[0].getElementsByClassName("categoryValue")[0].innerHTML = data[0]["name"]
+    categoryCells[0].onclick = function(){
+        console.log("********")
+        getProducts(false, "category", data[0]["name"])
+    }
+
+
+    
+
+    for(let i=1; i<data.length; i++){
+        categoryCells[i] = categoryCell.cloneNode(true)
+        categoryCells[i].getElementsByClassName("categoryValue")[0].innerHTML = data[i]["name"]
+        categoryCells[i].onclick = function(){
+            console.log("********")
+            getProducts(false, "category", data[i]["name"])
+        }
+
+        categoryCell.parentNode.appendChild(categoryCells[i])
+    }
 }

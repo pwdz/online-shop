@@ -106,6 +106,13 @@ function checkFinalEditValidation() {
 }
 
 function getLoginInput() {
-    console.log("hi2");
     return { email: email.value, password: fixNumbers(password.value) }
+}
+
+function getRegisterInput() {
+    return { email: email.value, password: fixNumbers(password.value), name: firstname.value, lastname: lastname.value, address: address.value }
+}
+
+function getEditInput() {
+    return { password: fixNumbers(password.value), name: firstname.value, lastname: lastname.value, address: address.value }
 }

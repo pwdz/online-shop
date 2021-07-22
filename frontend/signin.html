@@ -25,14 +25,15 @@
             <div class="menu"> 
                 <div class="left" id="left">
                     <!-- <button type="button" class="signin" id = "signin">ورود/ثبت نام</button> -->
-                    <button class="dropbtn"> 
+                    <button type="button" class="signin" id = "signin" onclick="mainPageSignBtnClick();">ورود/ثبت نام</button>
+                    <button class="dropbtn" id="dropbtn"> 
                         <div class="arrow"></div>
-                        Dropdown
+                        <div class="dropBtnText" id="dropBtnText">Dropdown</div>
                     </button>
                     
                     <div class="dropdown-content">
-                        <a href="#">پروفایل</a>
-                        <a href="#">خروج از حساب</a>
+                        <a class="profileBtn" href=# onpointerdown="profileBtnClick();" >پروفایل</a>
+                        <a class="profileBtn" href=# onpointerdown="logoutBtnClick();" >خروج از حساب</a>
                     </div>
                 </div>
                
@@ -73,7 +74,7 @@
                 </div>
                 
                 <button type="button" class="signupBtn" data-toggle="modal" onclick="clickSignInBtn();" data-target="#myModal" id ="signInBtn">ورود</button>
-                <a href="#">اگر حساب کاربری ندارید کلیک کنید</a>
+                <a href="signup.html">اگر حساب کاربری ندارید کلیک کنید</a>
             
             </div>
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
@@ -82,6 +83,7 @@
         <!-- Adding sthe script to html file -->
         <script src="assets/script/sign.js"></script>
         <script src="assets/script/modal.js"></script>
+        <script src="assets/script/mainpage.js"></script>
     </body>    </html>
 
 

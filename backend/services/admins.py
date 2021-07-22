@@ -30,7 +30,7 @@ def login(login_admin, email, password):
         token = loginService.generate_token(login_admin['_id'])
         login_admin['token'] = token.decode(encoding="utf-8")
         admins.save(login_admin)
-        return {'email': email, 'token': login_admin['token']}
+        return {'email': email, 'name': 'ادمین', 'token': login_admin['token']}
     else:
         raise Exception('Invalid credentials')
 

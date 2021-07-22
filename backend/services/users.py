@@ -84,7 +84,10 @@ def login(login_user, email, password):
         token = loginService.generate_token(login_user['_id'])
         login_user['token'] = token.decode(encoding="utf-8")
         users.save(login_user)
-        return {'email': email, 'token': login_user['token']}
+        name = 'کاربر'
+        if 'name' in login_user:
+            name = login_user['name']
+        return {'email': email, 'name': name, 'token': login_user['token']}
     else:
         raise Exception('Invalid credentials')
 

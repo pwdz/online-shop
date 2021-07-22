@@ -23,14 +23,15 @@
 
             <div class="menu"> 
                 <div class="left" id="left">
-                    <button class="dropbtn"> 
+                    <button type="button" class="signin" id = "signin" onclick="mainPageSignBtnClick();">ورود/ثبت نام</button>
+                    <button class="dropbtn" id="dropbtn"> 
                         <div class="arrow"></div>
-                        Dropdown
+                        <div class="dropBtnText" id="dropBtnText">Dropdown</div>
                     </button>
                     
                     <div class="dropdown-content">
-                        <a href="#">پروفایل</a>
-                        <a href="#">خروج از حساب</a>
+                        <a class="profileBtn" href=# onpointerdown="profileBtnClick();" >پروفایل</a>
+                        <a class="profileBtn" href=# onpointerdown="logoutBtnClick();" >خروج از حساب</a>
                     </div>
                 </div>
                
@@ -361,11 +362,11 @@
             <div class="empty"></div>
             <footer id="footer"><p>تمامی حقوق برای توسعه دهندگان محفوظ است</p></footer>
         </section>
-
-        <!-- Adding sthe script to html file 
-         <script src="resources/script/index.js"></> -->
+        <!-- Adding sthe script to html file -->
+        <!-- <script src="resources/script/index.js"></script> -->
+        <script src="assets/script/mainpage.js"></script>
         <script src="assets/script/adminPage.js"></script>
-    </body>
+    </body>   
 </html>
 
 

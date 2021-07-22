@@ -20,20 +20,61 @@ const modalText = document.getElementById("contentText");
 const modalContent = document.getElementById("modal-content");
 
 // When the user clicks on the button, open the modal
-function clickSignUpBtn() {
+async function clickSignUpBtn() {
     const valid = checkFinalUpValidation();
     let text = "";
     let textColor = "black";
     if (!valid) {
         text = "اطلاعات وارد شده معتبر نمی باشد";
     } else {
-        const emailCheck = data.map(v => v.email == email.value);
-        if (emailCheck.includes(true)) {
-            text = "ایمیل تکراری است";
-        } else {
-            text = "ثبت نام موفقیت آمیز است";
-            textColor = "green";
+        const registerData = getRegisterInput()
+        let formBody = [];
+        for (const property in registerData) {
+            const encodedKey = encodeURIComponent(property);
+            const encodedValue = encodeURIComponent(registerData[property]);
+            formBody.push(encodedKey + "=" + encodedValue);
         }
+        formBody = formBody.join("&");
+
+        try {
+
+            const res = await fetch('http://127.0.0.1:5000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: formBody
+            })
+            const resData = await res.json()
+            console.log(resData);
+            if (resData.success) {
+                text = "ثبت نام موفقیت آمیز است";
+                textColor = "green";
+                const resLoginData = await fetchUrl({ email: registerData.email, password: registerData.password }, 'http://127.0.0.1:5000/login', 'POST')
+                console.log(resLoginData);
+                if (resLoginData.success) {
+                    console.log(resLoginData);
+                    localStorage.setItem('name', resLoginData.data.name)
+                    localStorage.setItem('token', resLoginData.data.token)
+                }
+
+            }
+            else {
+                text = "اطلاعات وارد شده معتبر نمی باشد";
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+
+        // const emailCheck = data.map(v => v.email == email.value);
+        // if (emailCheck.includes(true)) {
+        //     text = "ایمیل تکراری است";
+        // } else {
+        //     text = "ثبت نام موفقیت آمیز است";
+        //     textColor = "green";
+        // }
     }
     modalText.innerText = text;
     modalText.style.color = textColor;
@@ -52,28 +93,15 @@ async function clickSignInBtn() {
     } else {
         // const inputCheck = data.map(v => v.email == email.value && v.pass == fixNumbers(password.value));
         // if (inputCheck.includes(true)) {
-        const loginData = getLoginInput()
-        let formBody = [];
-        for (const property in loginData) {
-            const encodedKey = encodeURIComponent(property);
-            const encodedValue = encodeURIComponent(loginData[property]);
-            formBody.push(encodedKey + "=" + encodedValue);
-        }
-        formBody = formBody.join("&");
-        console.log(formBody);
         try {
-            const res = await fetch('http://127.0.0.1:5000/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                },
-                body: formBody
-            })
-            const resData = await res.json()
+            const loginData = getLoginInput()
+            const resData = await fetchUrl(loginData, 'http://127.0.0.1:5000/login', 'POST')
             console.log(resData);
             if (resData.success) {
                 text = "ورود موفقیت آمیز است";
                 textColor = "green";
+                localStorage.setItem('name', resData.data.name)
+                localStorage.setItem('token', resData.data.token)
             }
             else {
                 text = "اطلاعات وارد شده معتبر نمی باشد";
@@ -89,15 +117,32 @@ async function clickSignInBtn() {
     modal.style.display = "block";
 }
 
-function clickEditBtn() {
+async function clickEditBtn() {
     const valid = checkFinalEditValidation();
     let text = "";
     let textColor = "black";
     if (!valid) {
         text = "اطلاعات وارد شده معتبر نمی باشد";
     } else {
-        text = "ویرایش موفقیت آمیز است";
-        textColor = "green";
+        try {
+            const editData = getEditInput()
+            console.log(editData);
+            console.log('http://127.0.0.1:5000/users/edit');
+            const resData = await fetchUrl(editData, 'http://127.0.0.1:5000/users/edit', 'PUT')
+            console.log(resData);
+            if (resData.success) {
+                text = "ویرایش موفقیت آمیز است";
+                textColor = "green";
+                localStorage.setItem('name', resData.data.name)
+                dropBtnText.innerText = localStorage.getItem('name')
+            }
+            else {
+                text = "اطلاعات وارد شده معتبر نمی باشد";
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
     modalText.innerText = text;
     modalText.style.color = textColor;
@@ -106,39 +151,44 @@ function clickEditBtn() {
 }
 
 // When the user clicks on <span> (x), close the modal
-function clickSpanBtn() {
-    console.log("hellooooo1");
+function clickSpanBtn(isEdit = false) {
     modal.style.animationName = "fadeOut_Modal";
     modalContent.style.animationName = "fadeOut_Container";
     modal.style.display = "none";
     modal.style.animationName = "fadeIn_Modal";
     modalContent.style.animationName = "fadeIn_Container";
-    // console.log("hellooooo2");
-    // new Promise((resolve, reject) => {
-    //     modal.addEventListener('animationend', animationEndCallback, true);
-    //     console.log("hollllllllllllllllllllla");
-    //     resolve();
-    // }).then(() => {
-    //     console.log("kokokokokokokokooooooo");
-    //     // modal.removeEventListener('animationend', animationEndCallback, true);
-    //     // modal.style.display = "none";
-    // })
-    // console.log("hellooooo3");
+
+    if (!isEdit && modalText.style.color == "green") {
+        location.href = '../frontend/index.html';
+    }
 
 }
-
-// function animationEndCallback(e) {
-//     console.log("hellooooo4");
-//     // modal.style.display = "none";
-//     modal.removeEventListener('animationend', undefined);
-//     modal.style.animationName = "fadeIn_Modal";
-//     modalContent.style.animationName = "fadeIn_Container";
-//     modal.style.display = "none";
-//     console.log("hellooooo5");
-// }
 
 window.onclick = function (event) {
     if (event.target == modal) {
         clickSpanBtn();
     }
 }
+
+async function fetchUrl(data, url, reqMethod) {
+    let formBody = [];
+    for (const property in data) {
+        const encodedKey = encodeURIComponent(property);
+        const encodedValue = encodeURIComponent(data[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+    console.log(formBody);
+    console.log(url);
+    const res = await fetch(url, {
+        method: reqMethod,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: formBody
+    })
+    console.log(url);
+    const resData = await res.json()
+    return resData
+}
+

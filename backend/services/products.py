@@ -89,6 +89,7 @@ def get_list(category=None, price_ascending=None, price_descending=None, date=No
         elif price_descending:
             filter = [("price", pymongo.DESCENDING)]
         elif date:
+            print("sdsdsdsdsdd")
             filter = [("timestamp", pymongo.DESCENDING)]
 
         records = products.find().sort(filter)

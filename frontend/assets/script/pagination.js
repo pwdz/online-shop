@@ -1,4 +1,4 @@
-const pageCapacity = 15
+const pageCapacity = 3
 var pageNumber = 0
 
 var productInfos;
@@ -6,34 +6,62 @@ var productCell = document.getElementsByClassName("product")[0]
 var productCells = []
 
 var nextPageBtn, prevPageBtn, numBtns;
-get();
-async function get(){
+
+var priceAscSort = document.getElementById("priceAscSort");
+var priceDesSort = document.getElementById("priceDesSort")
+var soldSort = document.getElementById("soldSort")
+var dateSort = document.getElementById("dateSort")
+priceAscSort.onclick = function(){
+    console.log("Asc")
+    getProducts(false, "price_ascending", true)
+}
+priceDesSort.onclick = function(){
+    console.log("Des")
+    getProducts(false, "price_descending", true)
+}
+soldSort.onclick = function(){
+    console.log("Sold")
+    getProducts(false)
+}
+dateSort.onclick = function(){
+    console.log("Date")
+    getProducts(false, "date", true)
+}
+getProducts(true);
+async function getProducts(isInit = false, key = null, value=null){
     try {
 
         let formBody = [];
-        // for (const property in loginData) {
-        //     const encodedKey = encodeURIComponent(property);
-        //     const encodedValue = encodeURIComponent(loginData[property]);
-        //     formBody.push(encodedKey + "=" + encodedValue);
-        // }
+        if (key!=null){
+            const encodedKey = encodeURIComponent(key);
+            const encodedValue = encodeURIComponent(value);
+            formBody.push(encodedKey + "=" + encodedValue);
+        }
         formBody = formBody.join("&");
 
         const res = await fetch('http://127.0.0.1:5000/products/list', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-            }
-            // body: formBody
+            },
+            body: formBody
         })
         const resData = await res.json()
         console.log(resData);
         if (resData.success) {
             console.log(resData.data)
             productInfos = resData.data
-
-            initProductCells();
-            setupPageButtons();
-            disableBtn(prevPageBtn)
+            
+            if(isInit){
+                initProductCells();
+                setupPageButtons();
+                disableBtn(prevPageBtn)
+            }else{
+                updateProductCells();
+                loadPage(1)
+                turnBtnOff()
+                selectBtn(numBtns[0])
+            }
         }
         else {
 

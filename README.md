@@ -5,6 +5,10 @@ by [pwdz](https://github.com/pwdz) & [rozhinst](https://github.com/rozhinst)
 ## backend
 - Python(flask)
 - MongoDB
+```
+python3 -m flask run
+```
+
 ## frontend
 - pure HTML, CSS, JS
 
